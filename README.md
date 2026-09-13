@@ -41,9 +41,9 @@ Google Fonts 연결이 없으면 시스템 글꼴로 표시됩니다.
 
 배포 대상 주소: [https://pjy008008.github.io/portfolio/](https://pjy008008.github.io/portfolio/)
 
-`.github/workflows/pages.yml`을 `main` 브랜치에 반영하고 Pages를 활성화하면, 이후 `main`에 push할 때마다 `dist` 폴더를 GitHub Pages로 배포합니다. 별도 설치나 빌드 과정이 없으며, 저장소의 Actions 탭에서 **Deploy portfolio to GitHub Pages → Run workflow**로 직접 실행할 수도 있습니다. 수동 실행도 `main` 브랜치에서만 배포합니다.
+공개 저장소 `pjy008008/portfolio`는 GitHub Actions를 통해 GitHub Pages에 배포합니다. `.github/workflows/pages.yml`이 `main`에 push할 때마다 `dist` 폴더를 배포하며, 별도 설치나 빌드 과정은 없습니다. 저장소의 Actions 탭에서 **Deploy portfolio to GitHub Pages → Run workflow**로 직접 실행할 수도 있습니다. 수동 실행(`workflow_dispatch`)도 `main` 브랜치에서만 배포합니다.
 
 배포 작업은 `github-pages` 환경을 사용하고, 앞선 배포가 끝난 뒤 다음 배포를 진행합니다. 사이트를 수정할 때는 `dist` 안의 파일을 변경해 `main`에 push하면 됩니다.
 
-현재 GitHub 요금제에서는 이 비공개 저장소의 Pages 활성화가 지원되지 않아 **최초 배포를 대기 중**입니다. 지원되는 요금제를 사용하거나 저장소를 공개로 전환한 뒤, 저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 설정해야 합니다. 활성화 후 워크플로를 실행하면 위 주소에 게시됩니다.
+Pages의 배포 소스는 **Settings → Pages → Build and deployment → Source → GitHub Actions**입니다. 배포 진행 상태와 결과는 저장소의 Actions 탭에서 확인할 수 있습니다.
 
