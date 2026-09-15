@@ -3,24 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080c16">
+<meta name="theme-color" content="#101112">
 <meta name="description" content="박준유의 개발 포트폴리오. IDEA2STRATEGY, 멀티모달 졸음 탐지, CRYPTO TRACKER의 문제 해결 과정과 학력·수상·기술 역량을 소개합니다.">
 <title>박준유 — Developer Portfolio</title>
 <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./style.css?v=1a7a7c53e6">
 </head>
 <body>
 <a class="skip-link" href="#panel-profile">선택한 내용으로 건너뛰기</a>
 <div class="ambient" aria-hidden="true">
-<div class="ambient-glow glow-cyan">
+<div class="ambient-light light-warm">
 </div>
-<div class="ambient-glow glow-violet">
+<div class="ambient-light light-cool">
 </div>
-<div class="ambient-grid">
-</div>
+<div class="ambient-sheen"></div>
 <canvas id="ambient-canvas">
 </canvas>
 <div class="ambient-grain">
@@ -31,7 +30,7 @@
 <div class="brand">
 <a href="#panel-profile" class="wordmark" data-select="0" aria-label="박준유 소개">pjy<span>.</span>
 </a>
-<span class="brand-caption">DEVELOPER<br>PORTFOLIO — 2026</span>
+<span class="brand-caption">DEVELOPER PORTFOLIO <span aria-hidden="true">/</span> 2026</span>
 </div>
 <nav class="header-links" aria-label="빠른 링크">
 <a class="header-link" href="https://github.com/pjy008008" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span>
@@ -42,10 +41,7 @@
 </header>
 <main class="portfolio" id="main">
 <div class="index-column">
-<div class="rail-heading">
-<span class="signal-dot">
-</span> EXPLORE <span>01 — 06</span>
-</div>
+<div class="rail-heading">INDEX <span>01 — 06</span></div>
 <div class="reel-viewport" id="reel-viewport">
 <nav class="reel-scene" aria-label="포트폴리오 목차, 위아래로 드래그하거나 방향키로 이동" >
 <a class="reel-item is-selected" id="tab-profile" href="#panel-profile" aria-controls="panel-profile" aria-current="location" data-index="0">
@@ -82,8 +78,7 @@
 <div class="hero-composition">
 <div class="hero-copy">
 <p class="eyebrow accent">
-<span class="signal-dot">
-</span> DEVELOPER · 박준유</p>
+DEVELOPER · 박준유</p>
 <h1>“쟤한테 가봐!”<br>
 <span class="dim">그 ‘쟤’가 되는<br>개발자.</span>
 </h1>
@@ -95,29 +90,14 @@
 </a>
 </div>
 </div>
-<figure class="hero-visual" aria-label="서로 연결된 신호와 궤도를 표현한 그래픽">
-<div class="orbit-halo">
-</div>
-<div class="orbit-cross cross-one">
-</div>
-<div class="orbit-cross cross-two">
-</div>
-<img class="signal-orbit" src="./assets/signal-orbit.svg" alt="" width="640" height="640" fetchpriority="high">
-<div class="orbit-caption">
-<span class="signal-dot">
-</span> IDEAS INTO SYSTEMS</div>
-<div class="orbit-tag tag-top">
-<span>FOCUS / 01</span>
-<strong>Backend & Data</strong>
-</div>
-<div class="orbit-tag tag-bottom">
-<span>CONNECTED THINKING</span>
-<strong>문제를 연결하고, 구조로 풀다.</strong>
-</div>
+<figure class="hero-visual" aria-label="하나의 흐름으로 이어진 금속 리본 조형물">
+<div class="sculpture-ground" aria-hidden="true"></div>
+<img class="hero-sculpture" src="./assets/chrome-sculpture.svg" alt="" width="720" height="720" fetchpriority="high">
+<figcaption class="sculpture-caption"><span>BACKEND · DATA · AI</span><span>FORM FOLLOWS LOGIC</span></figcaption>
 </figure>
 </div>
 <div class="hero-summary">
-<span class="summary-label">THE WAY I BUILD <i aria-hidden="true">↘</i>
+<span class="summary-label">APPROACH <i aria-hidden="true">↘</i>
 </span>
 <p class="body-copy intro-note">밀린 시세를 복구하는 트레이딩 봇부터 웹캠·생체 신호를 모으는 데이터 파이프라인까지. 문제의 원인을 구조에서 찾고, 동작을 테스트로 확인합니다.</p>
 </div>
@@ -682,7 +662,7 @@
 <noscript>
 <div class="noscript-note">스크롤로 모든 내용을 읽을 수 있습니다. 움직임 효과와 드래그 탐색은 JavaScript를 켜면 사용할 수 있습니다.</div>
 </noscript>
-<script src="./script.js?v=c3853491fc" type="module">
+<script src="./script.js?v=11c24da0ca" type="module">
 </script>
 </body>
 </html>

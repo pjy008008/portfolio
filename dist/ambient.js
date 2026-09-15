@@ -1,18 +1,23 @@
-const TAU = Math.PI * 2;
 const FRAME_INTERVAL = 1000 / 30;
 
-/** A quiet, viewport-sized star field behind the portfolio content. */
+/** Slow reflected-light contours behind the portfolio content. */
 export function initAmbient(canvas) {
   if (!canvas || typeof canvas.getContext !== 'function') return () => {};
   const context = canvas.getContext('2d');
   if (!context) return () => {};
 
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const colors = ['105, 247, 222', '158, 131, 255', '218, 232, 255'];
+  const contours = [
+    {offset: -.19, bend: .09, weight: .5},
+    {offset: -.095, bend: .035, weight: .65},
+    {offset: -.045, bend: .01, weight: .5},
+    {offset: 0, bend: 0, weight: .85},
+    {offset: .055, bend: -.015, weight: .5},
+    {offset: .135, bend: -.05, weight: .65},
+    {offset: .25, bend: -.095, weight: .5},
+  ];
   let width = 0;
   let height = 0;
-  let stars = [];
-  let links = [];
   let frame = 0;
   let timer = 0;
   let resizeFrame = 0;
@@ -20,15 +25,6 @@ export function initAmbient(canvas) {
   let elapsed = 0;
   let disposed = false;
   const pointer = {x: 0, y: 0, currentX: 0, currentY: 0};
-
-  // Stable placement keeps the field from jumping when the viewport resizes.
-  function randomSequence() {
-    let seed = 8127;
-    return () => {
-      seed = (seed * 16807) % 2147483647;
-      return (seed - 1) / 2147483646;
-    };
-  }
 
   function measure() {
     width = Math.max(1, window.innerWidth);
@@ -39,98 +35,36 @@ export function initAmbient(canvas) {
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-    const random = randomSequence();
-    const count = width <= 740 ? 24 : Math.min(60, Math.round(width / 24));
-    stars = Array.from({length: count}, (_, index) => ({
-      x: random(),
-      y: random(),
-      phase: random() * TAU,
-      depth: .3 + random() * .7,
-      radius: index % 11 === 0 ? 1.5 : .45 + random() * .6,
-      color: colors[index % colors.length],
-      screenX: 0,
-      screenY: 0,
-    }));
-
-    links = [];
-    const reach = Math.min(190, width * .2);
-    stars.forEach((star, index) => {
-      let nearest = -1;
-      let distance = reach;
-      for (let next = index + 1; next < stars.length; next++) {
-        const candidate = stars[next];
-        const separation = Math.hypot((star.x - candidate.x) * width, (star.y - candidate.y) * height);
-        if (separation < distance && separation > 35) {
-          nearest = next;
-          distance = separation;
-        }
-      }
-      if (nearest >= 0 && links.length < 22) links.push([index, nearest]);
-    });
   }
 
   function paint(time) {
     context.clearRect(0, 0, width, height);
-    const shiftX = pointer.currentX;
-    const shiftY = pointer.currentY;
+    const driftX = Math.sin(time * .035) * 12 + pointer.currentX * .7;
+    const driftY = Math.sin(time * .045) * 14 + pointer.currentY * .7;
 
-    // Oversized orbital paths connect the field without enclosing the content.
-    context.save();
-    context.translate(width * .78 + shiftX * .4, height * .4 + shiftY * .4);
-    context.rotate(-.42);
-    for (let orbit = 0; orbit < 3; orbit++) {
-      const radiusX = width * (.43 + orbit * .105);
-      const radiusY = height * (.27 + orbit * .105);
-      const gradient = context.createLinearGradient(-radiusX, -radiusY, radiusX, radiusY);
-      gradient.addColorStop(0, 'rgba(105, 247, 222, 0)');
-      gradient.addColorStop(.3, `rgba(${colors[orbit]}, .105)`);
-      gradient.addColorStop(.7, `rgba(${colors[(orbit + 1) % 3]}, .05)`);
-      gradient.addColorStop(1, 'rgba(158, 131, 255, 0)');
+    // Uneven spacing suggests reflections on a large curved studio surface.
+    // Opacity stays constant: the composition moves slowly without pulsing.
+    contours.forEach(({offset, bend, weight}, index) => {
+      const depth = .45 + index * .07;
+      const lift = offset * height + driftY * depth;
+      const gradient = context.createLinearGradient(width * .08, height, width * 1.03, height * .1);
+      gradient.addColorStop(0, 'rgba(192, 185, 171, 0)');
+      gradient.addColorStop(.22, 'rgba(192, 185, 171, .025)');
+      gradient.addColorStop(.5, 'rgba(157, 173, 190, .075)');
+      gradient.addColorStop(.74, `rgba(230, 231, 228, ${index === 3 ? .16 : .105})`);
+      gradient.addColorStop(1, 'rgba(218, 216, 210, 0)');
       context.strokeStyle = gradient;
-      context.lineWidth = .65;
+      context.lineWidth = weight;
       context.beginPath();
-      context.ellipse(0, 0, radiusX, radiusY, 0, 0, TAU);
-      context.stroke();
-    }
-    context.restore();
-
-    stars.forEach(star => {
-      star.screenX = star.x * width + Math.sin(time * .065 + star.phase) * 7 * star.depth + shiftX * star.depth;
-      star.screenY = star.y * height + Math.cos(time * .05 + star.phase) * 9 * star.depth + shiftY * star.depth;
-    });
-
-    links.forEach(([first, second]) => {
-      const a = stars[first];
-      const b = stars[second];
-      context.strokeStyle = `rgba(${a.color}, .075)`;
-      context.lineWidth = .55;
-      context.beginPath();
-      context.moveTo(a.screenX, a.screenY);
-      context.quadraticCurveTo((a.screenX + b.screenX) / 2, (a.screenY + b.screenY) / 2 - 8, b.screenX, b.screenY);
-      context.stroke();
-    });
-
-    stars.forEach((star, index) => {
-      const opacity = .3 + (.5 + Math.sin(time * .32 + star.phase) * .5) * .35;
-      context.fillStyle = `rgba(${star.color}, ${opacity})`;
-      context.beginPath();
-      context.arc(star.screenX, star.screenY, star.radius, 0, TAU);
-      context.fill();
-      if (index % 11 !== 0) return;
-
-      const glow = context.createRadialGradient(star.screenX, star.screenY, 0, star.screenX, star.screenY, 13);
-      glow.addColorStop(0, `rgba(${star.color}, .16)`);
-      glow.addColorStop(1, `rgba(${star.color}, 0)`);
-      context.fillStyle = glow;
-      context.fillRect(star.screenX - 13, star.screenY - 13, 26, 26);
-      context.strokeStyle = `rgba(${star.color}, .18)`;
-      context.lineWidth = .6;
-      context.beginPath();
-      context.moveTo(star.screenX - 5, star.screenY);
-      context.lineTo(star.screenX + 5, star.screenY);
-      context.moveTo(star.screenX, star.screenY - 5);
-      context.lineTo(star.screenX, star.screenY + 5);
+      context.moveTo(-width * .14, height * 1.12 + lift);
+      context.bezierCurveTo(
+        width * .43 + driftX * depth,
+        height * (1.02 + bend) + lift,
+        width * .4 + driftX,
+        height * (.1 - bend) + lift,
+        width * 1.16,
+        height * .2 + lift * .58,
+      );
       context.stroke();
     });
   }

@@ -1,5 +1,5 @@
 import {createDepthReveal} from './depth-reveal.js';
-import {initAmbient} from './ambient.js';
+import {initAmbient} from './ambient.js?v=ab9b22b175';
 import {reelGeometry, reelPose, cursorFromDrag, sectionAtScroll, scrollPositionFromCursor, cursorAtScroll} from './reel-core.js?v=089ad2fb41';
 
 initAmbient(document.querySelector('#ambient-canvas'));
