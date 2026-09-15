@@ -1,8 +1,10 @@
+import {initMaterialInteractions} from './material-interactions.js?v=ce241d5078';
 import {createDepthReveal} from './depth-reveal.js';
 import {initAmbient} from './ambient.js?v=a4a6e13449';
 import {reelGeometry, reelPose, cursorFromDrag, sectionAtScroll, scrollPositionFromCursor, cursorAtScroll} from './reel-core.js?v=089ad2fb41';
 
 initAmbient(document.querySelector('#ambient-canvas'));
+initMaterialInteractions();
 
 const items = [...document.querySelectorAll('.reel-item')];
 const sections = [...document.querySelectorAll('.detail-panel')];
