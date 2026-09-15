@@ -1,15 +1,15 @@
 const clamp = value => Math.max(0, Math.min(1, value));
 
 export function emergenceProgress(top, viewportHeight, headerHeight = 72) {
-  const start = viewportHeight * .96;
-  const finish = Math.min(start - 1, Math.max(headerHeight + 48, viewportHeight * .54));
+  const start = viewportHeight * .99;
+  const finish = Math.min(start - 1, Math.max(headerHeight + 48, viewportHeight * .82));
   return clamp((start - top) / (start - finish));
 }
 
 export function depthAppearance(progress) {
   const p = clamp(progress);
   const eased = p * p * (3 - 2 * p);
-  return {z: -360 * (1 - eased), blur: 10 * (1 - eased), opacity: .06 + .94 * eased};
+  return {z: -90 * (1 - eased), blur: 3 * (1 - eased), opacity: .25 + .75 * eased};
 }
 
 export function createDepthReveal(blocks, isReduced) {
