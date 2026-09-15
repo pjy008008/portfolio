@@ -1,5 +1,4 @@
-export const wrap = (value, count) => ((value % count) + count) % count;
-export const reelDistance = (index, cursor, count) => wrap(index - cursor + count / 2, count) - count / 2;
+export const reelDistance = (index, cursor) => index - cursor;
 
 export function reelGeometry(height) {
   const radius = height * .68;
@@ -8,7 +7,7 @@ export function reelGeometry(height) {
 }
 
 export function reelPose(index, cursor, count, height) {
-  const distance = reelDistance(index, cursor, count);
+  const distance = reelDistance(index, cursor);
   const depth = Math.abs(distance);
   const {radius, angle} = reelGeometry(height);
   const fade = Math.max(0, Math.min(1, (count / 2 - depth) / .65));
