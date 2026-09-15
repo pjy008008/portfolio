@@ -7,7 +7,6 @@ const viewport = document.querySelector('#reel-viewport');
 const scene = document.querySelector('.reel-scene');
 const keys = sections.map(section => section.id.replace('panel-', ''));
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
-let paused = false;
 let selected = 0;
 let targetCursor = 0;
 let animatedCursor = 0;
@@ -23,7 +22,7 @@ let announceTimer = 0;
 let suppressClickUntil = 0;
 const pointers = new Set();
 
-function reducedMotion() { return paused || motionPreference.matches; }
+function reducedMotion() { return motionPreference.matches; }
 function scrollOffset() { return document.querySelector('.site-header').offsetHeight + 36; }
 function sectionOffsets() {
   const maximum = Math.max(0, document.documentElement.scrollHeight - innerHeight);
@@ -223,18 +222,12 @@ const revealSelector = [
 ].join(',');
 const revealBlocks = [...document.querySelectorAll(revealSelector)];
 const depthReveal = createDepthReveal(revealBlocks, reducedMotion);
-const motionButton = document.querySelector('#motion-toggle');
 function updateMotion() {
   const reduce = reducedMotion();
   document.documentElement.dataset.reducedMotion = String(reduce);
-  motionButton.setAttribute('aria-pressed', String(reduce));
-  motionButton.textContent = reduce ? '모션 꺼짐 ○' : '모션 켜짐 ◉';
-  motionButton.disabled = motionPreference.matches;
-  motionButton.title = motionPreference.matches ? '기기의 동작 줄이기 설정을 따르고 있어요.' : '애니메이션 켜기 또는 끄기';
   if (reduce) { animatedCursor = targetCursor; paint(); }
   depthReveal.updateMotion();
 }
-motionButton.addEventListener('click', () => { paused = !paused; updateMotion(); });
 motionPreference.addEventListener('change', updateMotion);
 new ResizeObserver(() => {
   viewportHeight = viewport.clientHeight;
