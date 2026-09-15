@@ -1,6 +1,6 @@
 import {createDepthReveal} from './depth-reveal.js';
 import {initAmbient} from './ambient.js';
-import {wrap, reelDistance, reelGeometry, reelPose, cursorFromDrag, sectionAtScroll, scrollPositionFromCursor, cursorAtScroll} from './reel-core.js';
+import {reelGeometry, reelPose, cursorFromDrag, sectionAtScroll, scrollPositionFromCursor, cursorAtScroll} from './reel-core.js?v=089ad2fb41';
 
 initAmbient(document.querySelector('#ambient-canvas'));
 
@@ -88,7 +88,7 @@ function renderSelection({focus = false, announce = false, updateHash = true} = 
   }, 200);
 }
 function setActive(index, options = {}) {
-  targetCursor += reelDistance(index, targetCursor, items.length);
+  targetCursor = index;
   selected = index;
   renderSelection(options);
   animateToSelection();
@@ -156,7 +156,8 @@ scene.addEventListener('keydown', event => {
   event.preventDefault();
   settleDrag(false);
   const index = event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1 :
-    wrap(selected + (['ArrowDown', 'ArrowRight', 'PageDown'].includes(event.key) ? 1 : -1), items.length);
+    Math.max(0, Math.min(items.length - 1, selected + (['ArrowDown', 'ArrowRight', 'PageDown'].includes(event.key) ? 1 : -1)));
+  if (index === selected && !['Home', 'End'].includes(event.key)) return;
   navigate(index, {focus: true});
 });
 
