@@ -1,5 +1,8 @@
 import {createDepthReveal} from './depth-reveal.js';
+import {initAmbient} from './ambient.js';
 import {wrap, reelDistance, reelGeometry, reelPose, cursorFromDrag, sectionAtScroll, scrollPositionFromCursor, cursorAtScroll} from './reel-core.js';
+
+initAmbient(document.querySelector('#ambient-canvas'));
 
 const items = [...document.querySelectorAll('.reel-item')];
 const sections = [...document.querySelectorAll('.detail-panel')];
@@ -23,7 +26,10 @@ let suppressClickUntil = 0;
 const pointers = new Set();
 
 function reducedMotion() { return motionPreference.matches; }
-function scrollOffset() { return document.querySelector('.site-header').offsetHeight + 36; }
+function scrollOffset() {
+  const headerHeight = document.querySelector('.site-header').offsetHeight;
+  return headerHeight + (compact ? document.querySelector('.index-column').offsetHeight + 20 : 36);
+}
 function sectionOffsets() {
   const maximum = Math.max(0, document.documentElement.scrollHeight - innerHeight);
   const offset = scrollOffset();
@@ -52,6 +58,17 @@ function animateToSelection() {
   if (reducedMotion()) { animatedCursor = targetCursor; paint(); }
   else if (!reelFrame) reelFrame = requestAnimationFrame(animate);
 }
+function syncRailLayout() {
+  scene.setAttribute('aria-label', compact
+    ? '포트폴리오 목차, 좌우 방향키로 이동'
+    : '포트폴리오 목차, 위아래로 드래그하거나 방향키로 이동');
+  if (!compact) return;
+  const activeItem = items[selected];
+  scene.scrollTo({
+    left: activeItem.offsetLeft - (scene.clientWidth - activeItem.offsetWidth) / 2,
+    behavior: reducedMotion() ? 'auto' : 'smooth'
+  });
+}
 function renderSelection({focus = false, announce = false, updateHash = true} = {}) {
   items.forEach((item, index) => {
     const active = index === selected;
@@ -61,12 +78,13 @@ function renderSelection({focus = false, announce = false, updateHash = true} = 
     else item.removeAttribute('aria-current');
   });
   document.querySelector('.skip-link').href = '#panel-' + keys[selected];
+  syncRailLayout();
   if (updateHash) history.replaceState(null, '', '#' + keys[selected]);
   if (focus) items[selected].focus({preventScroll: true});
   clearTimeout(announceTimer);
   if (announce) announceTimer = setTimeout(() => {
     document.querySelector('#selection-status').textContent =
-      `${selected + 1} / ${items.length}, ${items[selected].textContent}로 이동`;
+      `${selected + 1} / ${items.length}, ${items[selected].querySelector('.reel-title').innerText.replace(/\s+/g, ' ').trim()} 섹션`;
   }, 200);
 }
 function setActive(index, options = {}) {
@@ -133,17 +151,18 @@ document.querySelectorAll('[data-select]').forEach(control => control.addEventLi
 scene.addEventListener('keydown', event => {
   if (event.altKey || event.ctrlKey || event.metaKey) return;
   if (event.key === 'Escape') { settleDrag(); return; }
-  if (!['ArrowDown','ArrowUp','Home','End','PageDown','PageUp'].includes(event.key)) return;
+  if (['ArrowLeft', 'ArrowRight'].includes(event.key) && !compact) return;
+  if (!['ArrowDown','ArrowUp','ArrowLeft','ArrowRight','Home','End','PageDown','PageUp'].includes(event.key)) return;
   event.preventDefault();
   settleDrag(false);
   const index = event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1 :
-    wrap(selected + (event.key === 'ArrowDown' || event.key === 'PageDown' ? 1 : -1), items.length);
+    wrap(selected + (['ArrowDown', 'ArrowRight', 'PageDown'].includes(event.key) ? 1 : -1), items.length);
   navigate(index, {focus: true});
 });
 
 // Pointer movement turns the reel and scrubs between document sections.
 viewport.addEventListener('pointerdown', event => {
-  if (event.button !== 0) return;
+  if (compact || event.button !== 0) return;
   pointers.add(event.pointerId);
   if (pointers.size > 1) { settleDrag(false); return; }
   finishNavigation();
@@ -232,6 +251,7 @@ motionPreference.addEventListener('change', updateMotion);
 new ResizeObserver(() => {
   viewportHeight = viewport.clientHeight;
   compact = matchMedia('(max-width: 740px)').matches;
+  syncRailLayout();
   paint();
   queueScroll();
 }).observe(viewport);
