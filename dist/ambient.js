@@ -1,4 +1,5 @@
 const FRAME_INTERVAL = 1000 / 30;
+const MAX_CANVAS_PIXELS = 4096 * 4096;
 
 /** Slow reflected-light contours behind the portfolio content. */
 export function initAmbient(canvas) {
@@ -24,17 +25,32 @@ export function initAmbient(canvas) {
   let previousTime = 0;
   let elapsed = 0;
   let disposed = false;
+  let densityQuery = null;
   const pointer = {x: 0, y: 0, currentX: 0, currentY: 0};
 
   function measure() {
     width = Math.max(1, window.innerWidth);
     height = Math.max(1, window.innerHeight);
-    const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
-    canvas.width = Math.round(width * ratio);
-    canvas.height = Math.round(height * ratio);
+    // Match the display's native density, including Retina and browser zoom.
+    // An area budget supports full 4K/5K output without unbounded allocation.
+    const ratio = Math.min(window.devicePixelRatio || 1, Math.sqrt(MAX_CANVAS_PIXELS / (width * height)));
+    canvas.width = Math.max(1, Math.floor(width * ratio));
+    canvas.height = Math.max(1, Math.floor(height * ratio));
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
-    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    context.setTransform(canvas.width / width, 0, 0, canvas.height / height, 0, 0);
+  }
+
+  function watchDensity() {
+    densityQuery?.removeEventListener('change', changeDensity);
+    densityQuery = window.matchMedia(`(resolution: ${window.devicePixelRatio || 1}dppx)`);
+    densityQuery.addEventListener('change', changeDensity);
+  }
+
+  function changeDensity() {
+    if (disposed) return;
+    watchDensity();
+    resize();
   }
 
   function paint(time) {
@@ -138,6 +154,7 @@ export function initAmbient(canvas) {
   document.addEventListener('visibilitychange', syncMotion);
   motion.addEventListener('change', syncMotion);
   measure();
+  watchDensity();
   syncMotion();
 
   return function dispose() {
@@ -149,6 +166,7 @@ export function initAmbient(canvas) {
     document.documentElement.removeEventListener('pointerleave', resetPointer);
     document.removeEventListener('visibilitychange', syncMotion);
     motion.removeEventListener('change', syncMotion);
+    densityQuery?.removeEventListener('change', changeDensity);
     context.clearRect(0, 0, width, height);
   };
 }

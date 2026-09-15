@@ -23,14 +23,13 @@ figure, dl { margin: 0; }
 ::selection { color: #121311; background: var(--accent); }
 [hidden] { display: none !important; }
 
-/* Broad studio light, fine grain, and slow reflections. */
+/* Clean studio gradients and slow, resolution-aware reflections. */
 .ambient { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; background: radial-gradient(ellipse at 85% 24%, #383a3c45, transparent 48%), linear-gradient(125deg, #161717, #101112 48%, #181819); }
-.ambient-light { position: absolute; width: 70vw; height: 95vh; pointer-events: none; filter: blur(100px); opacity: .4; }
+.ambient-light { position: absolute; width: 70vw; height: 95vh; pointer-events: none; opacity: .4; }
 .light-warm { right: -42vw; top: -20vh; background: radial-gradient(ellipse, #ad96844a, transparent 68%); }
 .light-cool { left: -55vw; bottom: -30vh; background: radial-gradient(ellipse, #8d9dae32, transparent 70%); }
 .ambient-sheen { position: absolute; width: 82vw; height: 150vh; right: -38vw; top: -50vh; transform: rotate(35deg); background: linear-gradient(90deg, transparent 5%, #ffffff02 46%, #e4e0d514 49.8%, #ffffff02 50.2%, transparent 72%); opacity: .55; }
 #ambient-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .65; }
-.ambient-grain { position: absolute; inset: 0; opacity: .022; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); }
 
 .portfolio-app { position: relative; z-index: 1; max-width: 1800px; margin: auto; padding: 0 clamp(22px, 3.5vw, 64px); }
 .site-header { position: sticky; top: 0; z-index: 30; height: var(--header-height); display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); background: transparent; }
@@ -40,7 +39,6 @@ figure, dl { margin: 0; }
 .brand-caption { padding-left: 23px; border-left: 1px solid var(--line); color: #8f918e; font-size: .62rem; line-height: 1.7; letter-spacing: 1.25px; }
 .header-links { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .header-link { display: inline-flex; gap: 18px; align-items: center; padding: 10px 12px; font-size: .8rem; border: 0; border-radius: 0; white-space: nowrap; transition: color .2s; }
-.header-link:last-child { border-bottom: 1px solid #b8b5ad66; background: transparent; }
 .header-link span { color: var(--accent); transition: transform .2s; }
 .header-link:hover { color: #fff; background: transparent; }
 .header-link:hover span { transform: translate(2px, -2px); }
@@ -186,7 +184,7 @@ details { border-top: 1px solid var(--line); }summary { cursor: pointer; list-st
   .section-heading { font-size: .84rem; margin-top: 29px; }.architecture-summary article { grid-template-columns: 1fr; gap: 7px; padding: 18px; }.architecture-summary p { font-size: .74rem; }.case-study > summary { padding: 18px 15px; gap: 10px; font-size: .76rem; }.case-study > summary > span:first-child { gap: 10px; }.project-story { padding: 0 17px 23px; }.project-story p, .project-story li { font-size: .79rem; }.disclosure-icon { flex-basis: 20px; height: 20px; }
   .timeline article { grid-template-columns: 1fr; gap: 10px; padding: 22px 0; }.timeline h3 { font-size: .85rem; }.timeline p { font-size: .78rem; }.credential-list > article { display: block; }.credential-list details { margin-top: 10px; text-align: left; }.credential-list h4 { font-size: .8rem; }
   .contact-type { font-size: 5.5rem; margin: 36px 0; letter-spacing: -5px; }.contact-body h2 { font-size: 1.6rem; }.contact-links > a { grid-template-columns: minmax(0, 1fr) 16px; gap: 8px; padding: 20px 0; }.contact-links span { grid-column: 1 / -1; }.contact-links strong { font-size: .92rem; }
-  .ambient-light { width: 160vw; filter: blur(70px); }.light-warm { right: -130vw; }.light-cool { left: -145vw; }#ambient-canvas { opacity: .4; }
+  .ambient-light { width: 160vw; }.light-warm { right: -130vw; }.light-cool { left: -145vw; }#ambient-canvas { opacity: .4; }
 }
 @media (max-width: 380px) { .portfolio-app { padding: 0 15px; }.brand-caption { display: none; }.hero-copy h1 { font-size: 2.6rem; }.project-body, .resume-body, .contact-body { padding: 24px 18px; }.hero-body > .fact-grid { padding: 18px; }.hero-body > .fact-grid dd { font-size: .64rem; } }
 
