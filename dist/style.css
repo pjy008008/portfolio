@@ -35,7 +35,7 @@ figure, dl { margin: 0; }
 @keyframes aurora-drift { to { transform: translate3d(8%, 14%, 0) scale(1.15); } }
 
 .portfolio-app { position: relative; z-index: 1; max-width: 1800px; margin: auto; padding: 0 clamp(22px, 3.5vw, 64px); }
-.site-header { position: sticky; top: 0; z-index: 30; height: var(--header-height); display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); background: #090e19d9; backdrop-filter: blur(22px); }
+.site-header { position: sticky; top: 0; z-index: 30; height: var(--header-height); display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); background: transparent; }
 .brand { display: flex; align-items: center; gap: 24px; }
 .wordmark { font-size: 2.1rem; font-weight: 800; letter-spacing: -2px; }
 .wordmark span { color: var(--accent); }
