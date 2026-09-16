@@ -94,10 +94,6 @@ h2 { font-size: clamp(1.9rem, 3vw, 3.2rem); margin: 21px 0 24px; }
 .sculpture-caption { position: absolute; bottom: 2%; left: 14%; right: 4%; display: flex; justify-content: space-between; align-items: center; gap: 14px; padding-top: 12px; border-top: 1px solid #e5e0d817; color: #7d827f; font-size: .48rem; letter-spacing: 1.2px; }
 .sculpture-caption span:last-child { color: #aaa89f; }
 @keyframes sculpture-drift { from { transform: translateY(3px) rotate(-2deg); } to { transform: translateY(-8px) rotate(1deg); } }
-.hero-summary { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 25px; align-items: start; padding: 25px 0; border-top: 1px solid var(--line); }
-.summary-label { color: #8c8e8f; font-size: .53rem; letter-spacing: 1.4px; line-height: 1.8; padding-top: 5px; }
-.summary-label i { display: block; font-style: normal; font-size: 1.5rem; color: #c4c7c8; margin-top: 8px; }
-.hero-summary .body-copy { color: #b8b9ba; font-size: .81rem; }
 .fact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin: 28px 0; }
 .fact-grid > div { min-width: 0; }
 .fact-grid dt { color: #8f9092; font-size: .58rem; letter-spacing: 1.2px; margin-bottom: 9px; }
@@ -161,7 +157,7 @@ details { border-top: 1px solid var(--line); }summary { cursor: pointer; list-st
   .portfolio { grid-template-columns: 140px minmax(0, 1fr); gap: 28px; }.rail-heading { padding-right: 14px; font-size: .5rem; letter-spacing: 1px; }.rail-heading > span:last-child { display: none; }
   .reel-title { font-size: 1.35rem; }.reel-title.long-title { font-size: .88rem; }.reel-item { gap: 7px; }.hero-copy h1 { font-size: 2.7rem; }.hero-copy .body-copy { font-size: .82rem; }
   .hero-visual { width: 120%; margin-left: -15%; }
-  .hero-summary { grid-template-columns: 112px minmax(0, 1fr); gap: 18px; }.hero-body > .fact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }.hero-body > .fact-grid dd { font-size: .76rem; }
+  .hero-body > .fact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }.hero-body > .fact-grid dd { font-size: .76rem; }
   .project-banner { padding: 32px; gap: 25px; min-height: 330px; }.project-banner h2 { font-size: 2.65rem; }.timeline article { grid-template-columns: 105px minmax(0, 1fr); }.resume-metrics { gap: 10px; }.resume-metrics > div + div { padding-left: 12px; }
 }
 @media (max-width: 850px) and (min-width: 741px) {
@@ -178,7 +174,7 @@ details { border-top: 1px solid var(--line); }summary { cursor: pointer; list-st
   .content-column { padding-top: 27px; }.detail-panel { min-height: 0; margin-bottom: 75px; scroll-margin-top: 157px; }.detail-panel:last-child { margin-bottom: 35px; }#panel-profile { min-height: 0; margin-bottom: 75px; }
   .hero-composition { grid-template-columns: 1fr; gap: 0; min-height: 0; }.hero-copy { padding: 15px 0 0; }.hero-copy h1 { font-size: clamp(2.5rem, 8.7vw, 3.65rem); letter-spacing: -2px; margin: 24px 0 22px; }.hero-copy .body-copy { font-size: .86rem; max-width: 42ch; }.eyebrow { font-size: .55rem; letter-spacing: 1.6px; }.profile-actions { margin-top: 25px; }.profile-actions .text-button { padding: 13px 17px; font-size: .72rem; }
   .hero-visual { width: min(100%, 430px); max-height: 390px; margin: -2px auto 18px; }
-  .hero-summary { display: block; padding: 23px 0; }.summary-label { display: flex; align-items: center; justify-content: space-between; padding: 0; margin-bottom: 12px; }.summary-label i { margin: 0; font-size: 1rem; }.hero-summary .body-copy { font-size: .79rem; }.hero-body > .fact-grid { padding: 20px; gap: 21px 15px; }.hero-body > .fact-grid dd { font-size: .69rem; }
+  .hero-body > .fact-grid { padding: 20px; gap: 21px 15px; }.hero-body > .fact-grid dd { font-size: .69rem; }
   h2 { font-size: 1.85rem; letter-spacing: -1.2px; }.body-copy { font-size: .84rem; }.project-body, .resume-body, .contact-body { padding: 26px 22px; border-radius: 5px; }.project-body > h2 { font-size: 1.7rem; }.project-marker { font-size: .43rem; gap: 10px; letter-spacing: 1.3px; margin-bottom: 13px; }
   .project-banner { grid-template-columns: 1fr; min-height: 280px; padding: 30px 24px; border-radius: 5px; }.project-banner h2 { font-size: clamp(2.6rem, 9vw, 3.8rem); letter-spacing: -2px; margin: 25px 0 20px; }.project-banner p { font-size: .76rem; }.concept-path, .signal-concept, .state-concept { display: none; }
   .project-body { margin-top: 12px; }.fact-grid { grid-template-columns: 1fr; gap: 20px; }.fact-grid dd { font-size: .77rem; }.chips { gap: 6px; }.chips span { padding: 5px 8px; font-size: .6rem; }
@@ -198,5 +194,5 @@ html[data-reduced-motion=true] .depth-reveal { opacity: 1; filter: none; transfo
 @media print {
   :root { --header-height: 0px; color-scheme: light; }html, body { overflow: visible; background: white; color: black; }.ambient, .site-header, .index-column, .hero-visual, .text-button, .project-marker { display: none; }
   .portfolio-app, .portfolio, .content-column, .detail-stage, .hero-composition { display: block; padding: 0; }.detail-panel { margin: 0 0 30px; min-height: 0; }.project-body, .resume-body, .contact-body, .project-banner, .hero-body > .fact-grid { background: white; box-shadow: none; border-color: #ccc; padding: 20px; }
-  .depth-reveal { opacity: 1 !important; filter: none !important; transform: none !important; }.project-banner::before, .project-banner::after, .contact-body::before { display: none; }.hero-copy h1 .dim { color: #333; background: none; }h1, h2, h3, h4, .dim, .body-copy, .fact-grid dd, .resume-metrics strong, .timeline p, .project-story p, .project-story li, .architecture-summary p, .contact-links strong, .contact-type { color: #222 !important; }.project-story, .case-study > div { display: block !important; }.hero-copy h1 { font-size: 35px; }.hero-summary { padding: 15px 0; }
+  .depth-reveal { opacity: 1 !important; filter: none !important; transform: none !important; }.project-banner::before, .project-banner::after, .contact-body::before { display: none; }.hero-copy h1 .dim { color: #333; background: none; }h1, h2, h3, h4, .dim, .body-copy, .fact-grid dd, .resume-metrics strong, .timeline p, .project-story p, .project-story li, .architecture-summary p, .contact-links strong, .contact-type { color: #222 !important; }.project-story, .case-study > div { display: block !important; }.hero-copy h1 { font-size: 35px; }
 }
