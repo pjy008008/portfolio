@@ -1,0 +1,369 @@
+/* A decade at a glance. The date scale runs from 2017-01-01 to 2027-01-01. */
+.bio-overview {
+  --bio-label-width: 194px;
+  --bio-paper: #1a1c1b;
+  --bio-rule: #e6e0d51a;
+  --bio-grid: #e6e0d50c;
+  --bio-education: #d9d9d2;
+  --bio-service: #a8b7c3;
+  --bio-award: #d5c2a8;
+  --bio-credential: #b0b5ac;
+  margin: 34px 0 40px;
+  min-width: 0;
+}
+
+.bio-overview-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+}
+
+.bio-overview-heading h3 {
+  margin: 0;
+  color: var(--ink, #f2f0ec);
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+  font-variant-numeric: tabular-nums;
+}
+
+.bio-overview-heading p {
+  color: #a5a8a2;
+  font-size: .72rem;
+  line-height: 1.7;
+}
+
+.bio-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  margin: 16px 0 17px;
+  padding: 0;
+  list-style: none;
+}
+
+.bio-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #b6b8b3;
+  font-size: .68rem;
+  line-height: 1.5;
+}
+
+.bio-overview .education { --bio-color: var(--bio-education); }
+.bio-overview .service { --bio-color: var(--bio-service); }
+.bio-overview .award { --bio-color: var(--bio-award); }
+.bio-overview .credential { --bio-color: var(--bio-credential); }
+
+.bio-legend i {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 6px;
+  border: 1px solid var(--bio-color);
+  border-radius: 1px;
+  background: var(--bio-color);
+}
+
+.bio-legend .award i {
+  width: 7px;
+  height: 7px;
+  margin: 0 5px;
+  border-radius: 0;
+  transform: rotate(45deg);
+}
+
+.bio-legend .credential i {
+  width: 7px;
+  height: 7px;
+  margin: 0 5px;
+  border-radius: 50%;
+}
+
+.bio-chart-scroll {
+  position: relative;
+  isolation: isolate;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-top: 1px solid #e6e0d52e;
+  border-bottom: 1px solid #e6e0d52e;
+  overscroll-behavior-x: contain;
+  scroll-padding-inline-start: calc(var(--bio-label-width) + 12px);
+  scrollbar-width: thin;
+  scrollbar-color: #767b73 #ffffff05;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bio-chart-scroll:focus-visible {
+  outline: 2px solid var(--accent, #d5c2a8);
+  outline-offset: 5px;
+}
+
+.bio-chart-scroll::-webkit-scrollbar { height: 7px; }
+.bio-chart-scroll::-webkit-scrollbar-track { background: #ffffff05; }
+.bio-chart-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid var(--bio-paper);
+  border-radius: 8px;
+  background: #767b73;
+}
+
+.bio-chart {
+  width: 100%;
+  min-width: 800px;
+  background: var(--bio-paper);
+}
+
+.bio-records {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bio-axis,
+.bio-row {
+  display: grid;
+  grid-template-columns: var(--bio-label-width) minmax(0, 1fr);
+}
+
+.bio-axis {
+  min-height: 38px;
+  border-bottom: 1px solid #e6e0d526;
+  color: #c4c6bf;
+  font-size: .68rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.bio-axis-label,
+.bio-row-label {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  min-width: 0;
+  border-right: 1px solid #e6e0d526;
+  background: var(--bio-paper);
+}
+
+.bio-axis-label {
+  display: flex;
+  align-items: center;
+  padding: 0 13px;
+  color: #969c93;
+  font-size: .64rem;
+  letter-spacing: .025em;
+}
+
+.bio-years {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.bio-years > span {
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+  border-left: 1px solid var(--bio-grid);
+  white-space: nowrap;
+}
+
+.bio-years > span:first-child { border-left: 0; }
+
+.bio-row {
+  min-height: 59px;
+  border-bottom: 1px solid var(--bio-rule);
+}
+
+.bio-row:last-child { border-bottom: 0; }
+.bio-row.is-group-start { border-top: 1px solid #e6e0d52e; }
+
+.bio-row-label {
+  display: grid;
+  align-content: center;
+  gap: 2px;
+  padding: 6px 13px;
+  line-height: 1.35;
+}
+
+.bio-row-kind {
+  color: var(--bio-color, #b0b5ac);
+  font-size: .57rem;
+  line-height: 1.3;
+  letter-spacing: .015em;
+}
+
+.bio-row-label strong {
+  color: #e0e1db;
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.bio-row-dates {
+  color: #9fa69c;
+  font-size: .625rem;
+  font-weight: 400;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.015em;
+}
+
+.bio-row-dates time { white-space: nowrap; }
+
+.bio-track {
+  position: relative;
+  min-width: 0;
+  min-height: 58px;
+  border-right: 1px solid var(--bio-grid);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--bio-grid) 0,
+    var(--bio-grid) 1px,
+    transparent 1px,
+    transparent 10%
+  );
+}
+
+.bio-period {
+  position: absolute;
+  top: 50%;
+  left: var(--start, 0%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--duration, 0%);
+  min-width: 2px;
+  height: 20px;
+  overflow: hidden;
+  border: 1px solid var(--bio-color);
+  border-radius: 2px;
+  background: var(--bio-color);
+  color: #252b28;
+  transform: translateY(-50%);
+}
+
+.bio-period > span {
+  overflow: hidden;
+  padding: 0 6px;
+  font-size: .625rem;
+  font-weight: 600;
+  line-height: 18px;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+.bio-period.is-ongoing {
+  border-right-style: dashed;
+  background-image: repeating-linear-gradient(
+    120deg,
+    transparent 0,
+    transparent 6px,
+    #1a1c1b0e 6px,
+    #1a1c1b0e 8px
+  );
+}
+
+.bio-milestone {
+  position: absolute;
+  top: 50%;
+  left: var(--at, 0%);
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--bio-color);
+  border-radius: 50%;
+  background: var(--bio-color);
+  transform: translate(-50%, -50%);
+}
+
+.bio-row.award .bio-milestone {
+  width: 9px;
+  height: 9px;
+  border-radius: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.bio-chart-note {
+  margin-top: 12px;
+  color: #989f95;
+  font-size: .67rem;
+  line-height: 1.8;
+}
+
+.bio-scroll-hint {
+  margin: 10px 0;
+  color: #b1b4ac;
+  font-size: .65rem;
+  line-height: 1.7;
+}
+
+@media (min-width: 1100px) {
+  .bio-scroll-hint { display: none; }
+}
+
+@media (max-width: 740px) {
+  .bio-overview {
+    --bio-label-width: 146px;
+    margin: 28px 0 32px;
+  }
+
+  .bio-overview-heading { gap: 6px 14px; }
+  .bio-overview-heading p { font-size: .66rem; }
+  .bio-legend { gap: 9px 16px; margin: 14px 0 16px; }
+  .bio-legend li { gap: 6px; font-size: .64rem; }
+  .bio-axis-label { padding: 0 9px; }
+  .bio-row-label { padding: 6px 9px; }
+  .bio-row-label strong { font-size: .72rem; }
+  .bio-row-dates { font-size: .61rem; }
+  .bio-chart-note { font-size: .64rem; }
+}
+
+@media print {
+  .bio-overview {
+    --bio-label-width: 160px;
+    --bio-paper: #fff;
+    --bio-rule: #dedede;
+    --bio-grid: #e6e6e6;
+    --bio-education: #c9ccca;
+    --bio-service: #a8b6c1;
+    --bio-award: #998064;
+    --bio-credential: #666f62;
+    margin: 20px 0;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .bio-overview-heading { break-after: avoid; }
+  .bio-overview-heading h3 { color: #222; font-size: 13pt; }
+  .bio-overview-heading p,
+  .bio-legend li,
+  .bio-chart-note { color: #555; }
+  .bio-legend { margin: 10px 0; gap: 8px 18px; }
+  .bio-chart-scroll { overflow: visible; border-color: #999; }
+  .bio-chart { min-width: 0; }
+  .bio-axis { min-height: 29px; border-color: #aaa; color: #333; font-size: 8pt; }
+  .bio-axis-label,
+  .bio-row-label { position: static; border-right-color: #bbb; }
+  .bio-axis-label { color: #555; font-size: 7.5pt; }
+  .bio-years > span { padding-left: 4px; }
+  .bio-row { min-height: 49px; break-inside: avoid; }
+  .bio-row.is-group-start { border-top-color: #aaa; }
+  .bio-row-label { gap: 1px; padding: 6px 9px; }
+  .bio-row-kind { color: #555; font-size: 6.5pt; }
+  .bio-row-label strong { color: #222; font-size: 8pt; }
+  .bio-row-dates { color: #555; font-size: 7pt; }
+  .bio-track { min-height: 48px; }
+  .bio-period { height: 17px; border-color: #737a74; color: #222; }
+  .bio-period > span { font-size: 7pt; line-height: 15px; }
+  .bio-chart-note { margin-top: 8px; font-size: 7pt; }
+  .bio-scroll-hint { display: none; }
+}

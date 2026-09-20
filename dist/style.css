@@ -196,3 +196,10 @@ html[data-reduced-motion=true] .depth-reveal { opacity: 1; filter: none; transfo
   .portfolio-app, .portfolio, .content-column, .detail-stage, .hero-composition { display: block; padding: 0; }.detail-panel { margin: 0 0 30px; min-height: 0; }.project-body, .resume-body, .contact-body, .project-banner, .hero-body > .fact-grid { background: white; box-shadow: none; border-color: #ccc; padding: 20px; }
   .depth-reveal { opacity: 1 !important; filter: none !important; transform: none !important; }.project-banner::before, .project-banner::after, .contact-body::before { display: none; }.hero-copy h1 .dim { color: #333; background: none; }h1, h2, h3, h4, .dim, .body-copy, .fact-grid dd, .resume-metrics strong, .timeline p, .project-story p, .project-story li, .architecture-summary p, .contact-links strong, .contact-type { color: #222 !important; }.project-story, .case-study > div { display: block !important; }.hero-copy h1 { font-size: 35px; }
 }
+
+/* Longer, factual project title. */
+.drowsy-banner h2 { font-size: clamp(2rem, 3.4vw, 3.8rem); line-height: 1.25; letter-spacing: -1.8px; }
+.bio-highlight strong, .timeline p strong { color: var(--ink); font-weight: 700; }
+@media (max-width: 740px) { .drowsy-banner h2 { font-size: clamp(1.8rem, 7.8vw, 2.5rem); letter-spacing: -1.1px; } }
+
+@media print { .bio-highlight strong, .timeline p strong { color: #222; } }

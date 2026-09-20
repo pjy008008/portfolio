@@ -10,7 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=c1f81a3d01">
+<link rel="stylesheet" href="./style.css?v=3dd1272fcc">
+<link rel="stylesheet" href="./bio-timeline.css?v=cab2719665">
 </head>
 <body>
 <a class="skip-link" href="#panel-profile">선택한 내용으로 건너뛰기</a>
@@ -119,24 +120,85 @@ DEVELOPER · 박준유</p>
 <section class="detail-panel" id="panel-career" aria-labelledby="tab-career" tabindex="0">
 <div class="panel-body resume-body">
 <p class="eyebrow accent">EDUCATION & ACHIEVEMENTS</p>
-<h2>배운 것을,<br>
-<span class="dim">구현으로 이어갑니다.</span>
-</h2>
-<p class="body-copy">소프트웨어 전공과 SSAFY 교육을 바탕으로 웹 개발, 데이터 처리, AI 서비스 개발 역량을 쌓고 있습니다.</p>
-<div class="resume-metrics">
-<div>
-<strong>4.1 / 4.5</strong>
-<span>충북대학교 학점</span>
-</div>
-<div>
-<strong>140</strong>
-<span>총 이수 학점</span>
-</div>
-<div>
-<strong>Professional</strong>
-<span>삼성 SW 역량테스트 B형</span>
-</div>
-</div>
+<h2 class="bio-title">Bio</h2>
+<p class="body-copy">학력과 교육, 병역, 수상 및 자격 취득 기록입니다.</p>
+<section class="bio-overview" aria-labelledby="bio-timeline-title">
+<div class="bio-overview-heading"><h3 id="bio-timeline-title">2017 — 2026</h3><p>학력·교육부터 자격 취득까지</p></div>
+<ul class="bio-legend" aria-label="타임라인 범례">
+<li class="education"><i aria-hidden="true"></i>학력·교육</li>
+<li class="service"><i aria-hidden="true"></i>병역</li>
+<li class="award"><i aria-hidden="true"></i>수상</li>
+<li class="credential"><i aria-hidden="true"></i>자격·어학</li>
+</ul>
+<p class="bio-scroll-hint">좌우로 넘겨 전체 연도를 확인하세요.</p>
+<div class="bio-chart-scroll" tabindex="0" role="region" aria-label="2017년부터 2026년까지의 이력 타임라인" aria-describedby="bio-chart-note">
+<div class="bio-chart" data-first-year="2017" data-end-year="2027">
+<div class="bio-axis" aria-hidden="true"><span class="bio-axis-label">기록</span><div class="bio-years">
+<span>2017</span>
+<span>2018</span>
+<span>2019</span>
+<span>2020</span>
+<span>2021</span>
+<span>2022</span>
+<span>2023</span>
+<span>2024</span>
+<span>2025</span>
+<span>2026</span>
+</div></div>
+<ol class="bio-records">
+<li class="bio-row education">
+<div class="bio-row-label"><span class="bio-row-kind">학력·교육</span><strong>남대전고등학교</strong><span class="bio-row-dates"><time datetime="2017-03-02">2017.03.02</time> — <time datetime="2020-01-31">2020.01.31</time></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-period" data-start="2017-03-02" data-end="2020-01-31" style="--start: 1.64384%; --duration: 29.17584%;"><span>재학</span></span>
+</div></li>
+<li class="bio-row education">
+<div class="bio-row-label"><span class="bio-row-kind">학력·교육</span><strong>충북대학교 · 소프트웨어 전공</strong><span class="bio-row-dates"><time datetime="2020-03-02">2020.03.02</time> — <time datetime="2026-02-23">2026.02.23</time></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-period" data-start="2020-03-02" data-end="2026-02-23" style="--start: 31.66667%; --duration: 59.78539%;"><span>재학</span></span>
+</div></li>
+<li class="bio-row education">
+<div class="bio-row-label"><span class="bio-row-kind">학력·교육</span><strong>SSAFY · Web Java 전공반</strong><span class="bio-row-dates"><time datetime="2026-01-18">2026.01.18</time> — <span>현재</span></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-period is-ongoing" data-start="2026-01-18" data-end="present" style="--start: 90.46575%; --duration: 6.71233%;"><span>교육 중</span></span>
+</div></li>
+<li class="bio-row service is-group-start">
+<div class="bio-row-label"><span class="bio-row-kind">병역</span><strong>육군 · 병장 만기제대</strong><span class="bio-row-dates"><time datetime="2021-01-25">2021.01.25</time> — <time datetime="2022-07-24">2022.07.24</time></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-period" data-start="2021-01-25" data-end="2022-07-24" style="--start: 40.65753%; --duration: 14.93151%;"><span>복무</span></span>
+</div></li>
+<li class="bio-row award is-group-start">
+<div class="bio-row-label"><span class="bio-row-kind">수상</span><strong>충북대학교 캡스톤 디자인 우수상</strong><span class="bio-row-dates"><time datetime="2025-11-13">2025.11.13</time></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-milestone" data-date="2025-11-13" style="--at: 88.65753%;"></span>
+</div></li>
+<li class="bio-row award">
+<div class="bio-row-label"><span class="bio-row-kind">수상</span><strong>SSAFY 성적 우수상</strong><span class="bio-row-dates"><time datetime="2026-06-26">2026.06.26</time></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-milestone" data-date="2026-06-26" style="--at: 94.82192%;"></span>
+</div></li>
+<li class="bio-row credential is-group-start">
+<div class="bio-row-label"><span class="bio-row-kind">자격·어학</span><strong>정보처리기사</strong><span class="bio-row-dates"><time datetime="2025-12-24">2025.12.24</time></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-milestone" data-date="2025-12-24" style="--at: 89.78082%;"></span>
+</div></li>
+<li class="bio-row credential">
+<div class="bio-row-label"><span class="bio-row-kind">자격·어학</span><strong>OPIc · IM2</strong><span class="bio-row-dates"><time datetime="2026-02-21">2026.02.21</time></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-milestone" data-date="2026-02-21" style="--at: 91.39726%;"></span>
+</div></li>
+<li class="bio-row credential">
+<div class="bio-row-label"><span class="bio-row-kind">자격·어학</span><strong>삼성 SW 역량테스트 B형</strong><span class="bio-row-dates"><time datetime="2026-04-03">2026.04.03</time></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-milestone" data-date="2026-04-03" style="--at: 92.52055%;"></span>
+</div></li>
+<li class="bio-row credential">
+<div class="bio-row-label"><span class="bio-row-kind">자격·어학</span><strong>SQLD</strong><span class="bio-row-dates"><time datetime="2026-06-19">2026.06.19</time></span></div>
+<div class="bio-track" aria-hidden="true">
+<span class="bio-milestone" data-date="2026-06-19" style="--at: 94.63014%;"></span>
+</div></li>
+</ol></div></div>
+<p class="bio-chart-note" id="bio-chart-note">막대는 재학·교육·복무 기간, 마름모와 점은 수상·자격 취득일입니다. SSAFY는 현재 진행 중입니다.</p>
+</section>
 <section class="resume-section">
 <h3 class="section-heading">학력·교육</h3>
 <div class="timeline">
@@ -145,6 +207,7 @@ DEVELOPER · 박준유</p>
 <div>
 <h3>삼성청년 SW·AI 아카데미 (SSAFY)</h3>
 <p class="timeline-team">Web Java 전공반 · 1학기 교육 이수</p>
+<p class="bio-highlight"><strong>삼성 SW 역량테스트 B형(Professional) 취득</strong> · 2026.04.03</p>
 <p>Java 기반 풀스택 웹 개발과 AI 활용 교육. 자료구조·알고리즘, 객체지향 프로그래밍, Spring Boot·MyBatis REST API, Vue.js, SQL·데이터베이스 모델링을 학습했습니다.</p>
 <p>생성형 AI·프롬프트 엔지니어링, AI 코딩 도구, LangChain·AI Agent·MCP 기반 서비스 개발도 학습했습니다.</p>
 </div>
@@ -153,7 +216,7 @@ DEVELOPER · 박준유</p>
 <span class="timeline-year">2020.03.02<br>— 2026.02.23</span>
 <div>
 <h3>충북대학교 · 소프트웨어 전공</h3>
-<p>졸업 · 학점 4.1 / 4.5 · 총 140학점 이수</p>
+<p>졸업 · 전체 학점 4.1 / 4.5 · 전공 학점 <strong>4.12 / 4.5</strong> · 총 140학점 이수</p>
 </div>
 </article>
 <article>
@@ -251,7 +314,7 @@ DEVELOPER · 박준유</p>
 <p class="eyebrow">2026.06 — 현재</p>
 <h2>IDEA2<span>STRATEGY</span>
 </h2>
-<p>전략을 만들고, 시험하고, 가상으로 실행하다.</p>
+<p>블록 기반 주식 가상 트레이딩 봇</p>
 </div>
 <div class="concept-path" aria-label="블록형 전략 편집, 백테스트, 가상 트레이딩">
 <span>STRATEGY<br>
@@ -396,8 +459,8 @@ DEVELOPER · 박준유</p>
 <div class="project-banner drowsy-banner">
 <div>
 <p class="eyebrow">2024.09 — 2025.11</p>
-<h2>두 신호,<br>하나의 판단.</h2>
-<p>멀티모달 기반 졸음 탐지 시스템</p>
+<h2>멀티모달 기반<br>졸음 감지 시스템</h2>
+<p>웹캠·웨어러블 데이터 기반 학습 지원 서비스</p>
 </div>
 <div class="signal-concept" aria-label="웹캠 얼굴 특징과 웨어러블 HRV 특징을 융합해 1에서 5단계 졸음 정도 산출">
 <div>
@@ -648,7 +711,7 @@ DEVELOPER · 박준유</p>
 <noscript>
 <div class="noscript-note">스크롤로 모든 내용을 읽을 수 있습니다. 움직임 효과와 드래그 탐색은 JavaScript를 켜면 사용할 수 있습니다.</div>
 </noscript>
-<script src="./script.js?v=ab42acb82a" type="module">
+<script src="./script.js?v=209ef83931" type="module">
 </script>
 </body>
 </html>
