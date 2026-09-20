@@ -217,17 +217,16 @@
 .bio-connector.award { stroke: #d5c2a86b; }
 .bio-connector.credential { stroke: #c5cbc160; }
 
-/* The compact icon row connects to exact event dates through the SVG beneath it. */
+/* Icons sit above their dates; layout only adjusts their centers to avoid collisions. */
 .bio-events {
+  --bio-event-gap: 6px;
   position: absolute;
   z-index: 3;
-  top: 8px;
+  top: 34px;
   right: 0;
   left: 0;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 6px;
+  display: block;
+  height: 28px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -235,11 +234,14 @@
 }
 .bio-event {
   --bio-event-color: var(--bio-flag);
-  flex: 0 0 28px;
+  position: absolute;
+  top: 0;
+  left: var(--event-x, 0px);
   width: 28px;
   height: 28px;
   margin: 0;
   padding: 0;
+  transform: translateX(-50%);
 }
 .bio-event.award { --bio-event-color: var(--bio-champagne); }
 .bio-event-symbol {
@@ -352,9 +354,9 @@
   .bio-chart-note { font-size: .64rem; }
 }
 @media (max-width: 480px) {
-  /* Seven milestones occupy 200px while retaining a 26 x 28px hit target. */
-  .bio-events { gap: 3px; }
-  .bio-event { flex-basis: 26px; width: 26px; }
+  /* Collision spacing lets seven 26 x 28px targets fit within 200px. */
+  .bio-events { --bio-event-gap: 3px; }
+  .bio-event { width: 26px; }
   .bio-event-symbol { width: 26px; }
   .bio-years { font-size: 9px; }
   .bio-years > span:not(:nth-child(3n + 1)) { color: transparent; }
