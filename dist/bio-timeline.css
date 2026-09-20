@@ -1,4 +1,4 @@
-/* One continuous time axis, with overlapping periods and dated milestones. */
+/* One time axis: thin overlapping periods, icon milestones, on-demand details. */
 .bio-overview {
   --bio-paper: #1a1c1b;
   --bio-silver: #d9d9d2;
@@ -16,7 +16,6 @@
   justify-content: space-between;
   gap: 8px 20px;
 }
-
 .bio-overview-heading h3 {
   margin: 0;
   color: var(--ink, #f2f0ec);
@@ -26,12 +25,7 @@
   letter-spacing: -.025em;
   font-variant-numeric: tabular-nums;
 }
-
-.bio-overview-heading p {
-  color: #a5a8a2;
-  font-size: .72rem;
-  line-height: 1.7;
-}
+.bio-overview-heading p { color: #a5a8a2; font-size: .72rem; line-height: 1.7; }
 
 .bio-legend {
   display: flex;
@@ -42,7 +36,6 @@
   padding: 0;
   list-style: none;
 }
-
 .bio-legend li {
   display: inline-flex;
   align-items: center;
@@ -52,12 +45,10 @@
   font-size: .68rem;
   line-height: 1.5;
 }
-
 .bio-legend .education { --bio-color: var(--bio-silver); }
 .bio-legend .service { --bio-color: var(--bio-bluegray); }
 .bio-legend .award { --bio-color: var(--bio-champagne); }
 .bio-legend .credential { --bio-color: var(--bio-flag); }
-
 .bio-legend i {
   display: inline-flex;
   align-items: center;
@@ -71,15 +62,8 @@
   color: var(--bio-color);
   font-style: normal;
 }
-
 .bio-legend .award i,
-.bio-legend .credential i {
-  height: 17px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-}
-
+.bio-legend .credential i { height: 17px; border: 0; border-radius: 0; background: transparent; }
 .bio-legend svg {
   display: block;
   width: 16px;
@@ -104,12 +88,7 @@
   scrollbar-color: #767b73 #ffffff05;
   -webkit-overflow-scrolling: touch;
 }
-
-.bio-chart-scroll:focus-visible {
-  outline: 2px solid var(--accent, #d5c2a8);
-  outline-offset: 5px;
-}
-
+.bio-chart-scroll:focus-visible { outline: 2px solid var(--accent, #d5c2a8); outline-offset: 5px; }
 .bio-chart-scroll::-webkit-scrollbar { height: 7px; }
 .bio-chart-scroll::-webkit-scrollbar-track { background: #ffffff05; }
 .bio-chart-scroll::-webkit-scrollbar-thumb {
@@ -117,18 +96,8 @@
   border-radius: 8px;
   background: #767b73;
 }
-
-.bio-chart {
-  width: 100%;
-  min-width: 860px;
-  padding: 0 16px;
-  background: var(--bio-paper);
-}
-
-.bio-plot {
-  position: relative;
-  height: 400px;
-}
+.bio-chart { width: 100%; min-width: 860px; padding: 0 16px; background: var(--bio-paper); }
+.bio-plot { position: relative; height: 330px; }
 
 .bio-periods,
 .bio-events {
@@ -138,10 +107,20 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  pointer-events: none;
 }
-
 .bio-periods { z-index: 1; }
 .bio-events { z-index: 2; }
+
+.bio-trigger {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color .16s, border-color .16s, color .16s;
+}
+.bio-trigger:focus-visible { outline: 2px solid var(--accent, #d5c2a8); outline-offset: 4px; }
 
 .bio-band {
   position: absolute;
@@ -149,200 +128,101 @@
   left: var(--start, 0%);
   width: var(--duration, 0%);
   min-width: 2px;
-  height: 48px;
+  height: 20px;
   margin: 0;
   padding: 0;
 }
-
 .bio-band-body {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
   border: 1px solid #d9d9d29e;
   border-radius: 2px;
-  background: #d9d9d229;
+  background: #d9d9d23b;
   color: #eceee8;
 }
-
-.bio-band-body strong {
-  display: block;
-  min-width: 0;
-  padding: 0 10px;
-  font-size: .75rem;
-  font-weight: 500;
-  line-height: 1.4;
-  white-space: nowrap;
-}
-
-.bio-band.university .bio-band-body {
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding-top: 7px;
-  background: #c5cec72e;
-}
-
-.bio-band.university .bio-band-body strong { padding: 0 14px; }
-
-.bio-band.service {
-  z-index: 2;
-  top: 277px;
-  height: 27px;
-}
-
-.bio-band.service .bio-band-body {
-  border-color: #bfd1dccc;
-  background: #849aad94;
-  color: #f1f5f7;
-}
-
-.bio-band.service .bio-band-body strong {
-  padding: 0 7px;
-  font-size: .69rem;
-}
-
-.bio-band.academy {
-  z-index: 3;
-  top: 238px;
-  height: 40px;
-}
-
-.bio-band.academy .bio-band-body {
-  border-color: #e9e5d5;
-  border-right-style: dashed;
-  background: #dedbd26e;
-  color: #fffdf5;
-}
-
-.bio-band.academy .bio-band-body strong {
-  padding: 0 5px;
-  font-size: .69rem;
-  letter-spacing: -.02em;
-}
-
-.bio-band-dates {
+/* The visible strip stays slim while its invisible vertical hit area stays usable. */
+.bio-band-body::before {
+  content: '';
   position: absolute;
-  top: 60px;
-  left: 50%;
-  width: max-content;
-  color: #b7bcb2;
-  font-size: .64rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: -.015em;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-  transform: translateX(-50%);
-}
-
-.bio-band-dates time { white-space: nowrap; }
-
-.bio-band.university .bio-band-dates {
-  right: 22%;
-  left: auto;
-  text-align: right;
-  transform: none;
-}
-
-.bio-band.service .bio-band-dates { top: 35px; }
-
-.bio-band.academy .bio-band-dates {
-  top: 74px;
+  top: 50%;
   right: 0;
-  left: auto;
-  text-align: right;
-  transform: none;
+  left: 0;
+  height: 100%;
+  min-height: 32px;
+  transform: translateY(-50%);
 }
+.bio-band.university .bio-band-body { background: #c5cec743; }
+.bio-band.service { z-index: 2; top: 263px; height: 14px; }
+.bio-band.service .bio-band-body { border-color: #bfd1dccc; background: #849aadad; }
+.bio-band.academy { z-index: 3; top: 243px; height: 18px; }
+.bio-band.academy .bio-band-body { border-color: #e9e5d5; border-right-style: dashed; background: #dedbd28a; }
+.bio-band-body:hover,
+.bio-band-body.is-active { border-color: #f3f2e8; background: #d9d9d26b; }
+.bio-band.service .bio-band-body:hover,
+.bio-band.service .bio-band-body.is-active { border-color: #e0edf5; background: #a1b5c7c9; }
+.bio-band.academy .bio-band-body:hover,
+.bio-band.academy .bio-band-body.is-active { border-color: #fffdf4; background: #e6e2d5b3; }
 
-/* Keep the date x position exact. Only the label height changes in dense years. */
+/* Marker centers preserve the actual date; only the vertical level changes. */
 .bio-event {
   --bio-event-color: var(--bio-flag);
   position: absolute;
   top: var(--flag-y, 18px);
   left: var(--at, 0%);
-  width: 24px;
-  height: 24px;
-  margin: 0 0 0 -12px;
+  width: 36px;
+  height: 36px;
+  margin: 0 0 0 -18px;
   padding: 0;
   color: var(--bio-event-color);
 }
-
 .bio-event.award { --bio-event-color: var(--bio-champagne); }
-
 .bio-event::after {
   content: '';
   position: absolute;
   z-index: 0;
-  top: 24px;
-  left: 11.5px;
+  top: 36px;
+  left: 17.5px;
   width: 1px;
-  height: max(0px, calc(262px - var(--flag-y, 18px) - 24px));
+  height: max(0px, calc(252px - var(--flag-y, 18px) - 36px));
   background: currentColor;
-  opacity: .26;
+  opacity: .28;
   pointer-events: none;
 }
-
-.bio-event-label {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  right: calc(100% + 5px);
-  display: grid;
-  gap: 1px;
-  width: max-content;
-  padding: 2px 4px 3px;
-  background: var(--bio-paper);
-  text-align: right;
-  transform: translateY(-50%);
-}
-
-.bio-event-label time {
-  color: #9da599;
-  font-size: .61rem;
-  font-weight: 400;
-  line-height: 1.35;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .005em;
-  white-space: nowrap;
-}
-
-.bio-event-label strong {
-  color: #d4d8d0;
-  font-size: .71rem;
-  font-weight: 500;
-  line-height: 1.4;
-  white-space: nowrap;
-}
-
-.bio-event.award .bio-event-label strong { color: #dfccb2; }
-
 .bio-event-symbol {
   position: relative;
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid transparent;
+  border-radius: 3px;
   background: var(--bio-paper);
   color: var(--bio-event-color);
 }
-
+.bio-event-symbol:hover,
+.bio-event-symbol.is-active { border-color: #dce1d330; background: #2b2f29; color: #eff0e8; }
+.bio-event.award .bio-event-symbol:hover,
+.bio-event.award .bio-event-symbol.is-active { border-color: #d5c2a854; color: #f0d9b7; }
 .bio-event-symbol svg {
   display: block;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+  pointer-events: none;
 }
 
 .bio-years {
   position: absolute;
-  top: 355px;
+  top: 295px;
   right: 0;
   left: 0;
   display: grid;
@@ -353,7 +233,6 @@
   line-height: 1.4;
   font-variant-numeric: tabular-nums;
 }
-
 .bio-years > span {
   position: relative;
   display: block;
@@ -361,35 +240,60 @@
   white-space: nowrap;
   transform: translateX(-1px);
 }
+.bio-years > span::before { content: ''; position: absolute; top: -1px; left: 1px; width: 1px; height: 6px; background: #cad2c36b; }
+.bio-chart-note { margin-top: 11px; color: #989f95; font-size: .67rem; line-height: 1.8; }
+.bio-scroll-hint { margin-top: 10px; color: #b1b4ac; font-size: .65rem; line-height: 1.7; }
 
-.bio-years > span::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 1px;
-  width: 1px;
-  height: 6px;
-  background: #cad2c36b;
+/* Appended to body so the scroll region never clips the hovered details. */
+.bio-tooltip {
+  position: fixed;
+  z-index: 120;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(300px, calc(100vw - 24px));
+  padding: 14px 16px;
+  border: 1px solid #777d6e;
+  border-radius: 4px;
+  background: #232621;
+  color: #e7eae0;
+  box-shadow: 0 12px 34px #0006;
+  font-family: inherit;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  pointer-events: auto;
 }
-
-.bio-chart-note {
-  margin-top: 11px;
-  color: #989f95;
-  font-size: .67rem;
-  line-height: 1.8;
+.bio-tooltip[hidden],
+.bio-tooltip [hidden] { display: none !important; }
+.bio-tooltip-date {
+  display: block;
+  margin: 0 0 5px;
+  color: #c3b89f;
+  font-size: 12px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
 }
-
-.bio-scroll-hint {
-  margin-top: 10px;
-  color: #b1b4ac;
-  font-size: .65rem;
+.bio-tooltip-title {
+  display: block;
+  margin: 0;
+  color: #f0f0e8;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+.bio-tooltip-description {
+  display: block;
+  margin: 7px 0 0;
+  color: #bdc4b7;
+  font-size: 12px;
+  font-weight: 400;
   line-height: 1.7;
+  word-break: keep-all;
 }
+.bio-tooltip-description:empty { display: none; }
 
-@media (min-width: 1400px) {
-  .bio-scroll-hint { display: none; }
-}
-
+@media (min-width: 1400px) { .bio-scroll-hint { display: none; } }
 @media (max-width: 740px) {
   .bio-overview { margin: 26px 0 30px; }
   .bio-overview-heading { gap: 6px 14px; }
@@ -398,6 +302,7 @@
   .bio-legend li { gap: 6px; font-size: .64rem; }
   .bio-chart-note { font-size: .64rem; }
 }
+@media (prefers-reduced-motion: reduce) { .bio-trigger { transition: none; } }
 
 @media print {
   .bio-overview {
@@ -411,7 +316,6 @@
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
-
   .bio-overview-heading { break-after: avoid; }
   .bio-overview-heading h3 { color: #222; font-size: 13pt; }
   .bio-overview-heading p,
@@ -420,21 +324,26 @@
   .bio-legend { margin: 10px 0; gap: 8px 18px; }
   .bio-chart-scroll { overflow: visible; border-color: #bbb; }
   .bio-chart { min-width: 0; padding: 0 8px; }
-  .bio-band-body { border-color: #757e73; background: #e1e4de; color: #222; }
-  .bio-band-body strong { font-size: 7.5pt; }
+  .bio-band-body,
+  .bio-band-body:hover,
+  .bio-band-body.is-active { border-color: #757e73; background: #e1e4de; }
   .bio-band.university .bio-band-body { background: #d1d7cfb3; }
-  .bio-band.service .bio-band-body { border-color: #6a8294; background: #8da6bcb3; color: #162532; }
-  .bio-band.academy .bio-band-body { border-color: #77796c; background: #c9cbb5b3; color: #25271d; }
-  .bio-band.service .bio-band-body strong,
-  .bio-band.academy .bio-band-body strong { font-size: 7pt; }
-  .bio-band.academy .bio-band-body strong { padding-inline: 2px; }
-  .bio-band-dates { color: #4a5145; font-size: 6pt; }
-  .bio-event-label time { color: #596052; font-size: 6.5pt; }
-  .bio-event-label strong { color: #293123; font-size: 7.5pt; }
-  .bio-event.award .bio-event-label strong { color: #765737; }
+  .bio-band.service .bio-band-body,
+  .bio-band.service .bio-band-body:hover,
+  .bio-band.service .bio-band-body.is-active { border-color: #6a8294; background: #8da6bcb3; }
+  .bio-band.academy .bio-band-body,
+  .bio-band.academy .bio-band-body:hover,
+  .bio-band.academy .bio-band-body.is-active { border-color: #77796c; background: #c9cbb5b3; }
+  .bio-trigger:focus-visible { outline: none; }
+  .bio-event-symbol,
+  .bio-event-symbol:hover,
+  .bio-event-symbol.is-active,
+  .bio-event.award .bio-event-symbol:hover,
+  .bio-event.award .bio-event-symbol.is-active { border-color: transparent; background: #fff; color: var(--bio-event-color); }
   .bio-event::after { opacity: .45; }
   .bio-years { border-color: #888; color: #454c40; font-size: 7.5pt; }
   .bio-years > span::before { background: #888; }
   .bio-chart-note { margin-top: 8px; font-size: 7pt; }
-  .bio-scroll-hint { display: none; }
+  .bio-scroll-hint,
+  .bio-tooltip { display: none !important; }
 }
