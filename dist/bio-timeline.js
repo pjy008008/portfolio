@@ -1,5 +1,9 @@
 // Each calendar year gets one equal-width column, including leap years.
 export function timelinePosition(value, firstYear = 2017, endYear = 2027) {
+  // Year-only records align with that year's tick without inventing a month or day.
+  if (typeof value === 'string' && /^\d{4}$/.test(value)) {
+    return Math.max(0, Math.min(100, (Number(value) - firstYear) / (endYear - firstYear) * 100));
+  }
   const date = value instanceof Date ? value : new Date(`${value}T00:00:00Z`);
   const year = date.getUTCFullYear();
   const start = Date.UTC(year, 0, 1);
@@ -23,7 +27,7 @@ export function initBioTimeline(now = new Date()) {
   return initBioTooltips();
 }
 
-// Icons stay separated; each curve ends at the actual milestone date.
+// Icons stay separated; each curve ends at the recorded date or year tick.
 const connectorObservers = new WeakMap();
 
 function initBioConnectors(chart) {
