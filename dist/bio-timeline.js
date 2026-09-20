@@ -42,10 +42,6 @@ export function initBioTooltips() {
     tooltip.append(part);
     return part;
   });
-  const recordList = document.createElement('ul');
-  recordList.className = 'bio-tooltip-records';
-  recordList.hidden = true;
-  tooltip.append(recordList);
   document.body.append(tooltip);
 
   const cleanups = [];
@@ -85,13 +81,13 @@ export function initBioTooltips() {
     const margin = 12;
     const gap = 12;
     tooltip.style.position = 'fixed';
-    tooltip.style.maxWidth = `${Math.min(recordList.hidden ? 300 : 340, Math.max(0, viewportWidth - margin * 2))}px`;
+    tooltip.style.maxWidth = `${Math.min(300, Math.max(0, viewportWidth - margin * 2))}px`;
     tooltip.style.maxHeight = `${Math.max(0, viewportHeight - margin * 2)}px`;
     tooltip.style.overflowY = 'auto';
     const {width, height} = tooltip.getBoundingClientRect();
     const x = (anchor.left + anchor.right - width) / 2;
     const y = (anchor.top + anchor.bottom - height) / 2;
-    const obstacles = triggers.filter(item => item !== trigger && item.closest('.bio-year-group')).map(visibleRect).filter(Boolean);
+    const obstacles = triggers.filter(item => item !== trigger && item.closest('.bio-event')).map(visibleRect).filter(Boolean);
     const overlap = (a, b) => Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) *
       Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
     const candidates = [
@@ -146,31 +142,6 @@ export function initBioTooltips() {
       parts[index].textContent = summary?.querySelector(`[data-bio-${name}]`)?.textContent.trim() || '';
       parts[index].hidden = !parts[index].textContent;
     });
-    // Each year has one compact badge; its individual dates stay in this list.
-    recordList.replaceChildren();
-    trigger.querySelectorAll('[data-bio-record]').forEach(record => {
-      const item = document.createElement('li');
-      item.className = `bio-tooltip-record ${record.dataset.kind}`;
-      const symbol = document.createElement('span');
-      symbol.className = 'bio-record-symbol';
-      symbol.setAttribute('aria-hidden', 'true');
-      const icon = record.querySelector('svg');
-      if (icon) symbol.append(icon.cloneNode(true));
-      const content = document.createElement('span');
-      content.className = 'bio-record-content';
-      const date = document.createElement('time');
-      date.className = 'bio-record-date';
-      const sourceDate = record.querySelector('[data-bio-date] time');
-      date.dateTime = sourceDate?.dateTime || '';
-      date.textContent = sourceDate?.textContent || '';
-      const title = document.createElement('strong');
-      title.className = 'bio-record-title';
-      title.textContent = record.querySelector('[data-bio-title]').textContent.trim();
-      content.append(date, title);
-      item.append(symbol, content);
-      recordList.append(item);
-    });
-    recordList.hidden = !recordList.childElementCount;
     tooltip.hidden = false;
     if (!position(trigger)) { hide(); return; }
     trigger.classList.add('is-active');
