@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css?v=3dd1272fcc">
-<link rel="stylesheet" href="./bio-timeline.css?v=4c2930084f">
+<link rel="stylesheet" href="./bio-timeline.css?v=60d8c2a76e">
 </head>
 <body>
 <a class="skip-link" href="#panel-profile">선택한 내용으로 건너뛰기</a>
@@ -121,12 +121,13 @@ DEVELOPER · 박준유</p>
 <div class="panel-body resume-body">
 <p class="eyebrow accent">EDUCATION & ACHIEVEMENTS</p>
 <h2 class="bio-title">Bio</h2>
-<p class="body-copy">학력·교육, 병역, 수상 및 자격 취득 기록</p>
+<p class="body-copy">학력·교육, 동아리 활동, 병역, 수상 및 자격 취득 기록</p>
 <section class="bio-overview" aria-labelledby="bio-timeline-title">
 <div class="bio-overview-heading"><h3 id="bio-timeline-title">2017 — 2026</h3><p>학력·교육과 함께 쌓아온 기록</p></div>
 <ul class="bio-legend" aria-label="타임라인 범례">
 <li class="education"><i aria-hidden="true"></i>학력·교육</li>
 <li class="service"><i aria-hidden="true"></i>군복무</li>
+<li class="activity"><i aria-hidden="true"></i>동아리</li>
 <li class="award"><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4.5"/><path d="m8.5 11.5-2 10L12 18l5.5 3.5-2-10"/></svg></i>수상</li>
 <li class="credential"><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3h14l-3 4 3 4H5"/></svg></i>자격·어학</li>
 </ul>
@@ -134,7 +135,7 @@ DEVELOPER · 박준유</p>
 <div class="bio-chart" data-first-year="2017" data-end-year="2027">
 <div class="bio-plot">
 <svg class="bio-connectors" aria-hidden="true" focusable="false" preserveAspectRatio="none"></svg>
-<ol class="bio-periods" aria-label="학력·교육 및 군복무 기간">
+<ol class="bio-periods" aria-label="학력·교육, 군복무 및 동아리 활동 기간">
 <li class="bio-band school" data-start="2017-03-02" data-end="2020-01-31" style="--start: 1.64384%; --duration: 29.17584%;">
 <button type="button" class="bio-trigger bio-band-body">
 <span class="sr-only">
@@ -162,6 +163,15 @@ DEVELOPER · 박준유</p>
 </span>
 </button>
 </li>
+<li class="bio-band activity" data-start="2023" data-end="2026-02-23" style="--start: 60%; --duration: 31.45205%;">
+<button type="button" class="bio-trigger bio-band-body">
+<span class="sr-only">
+<strong data-bio-title>충북대학교 학술동아리 CUVIC</strong>
+<span data-bio-date><span>2023</span> — <time datetime="2026-02-23">2026.02.23</time> (졸업)</span>
+<span data-bio-description>2024년 회장 역임 · 기술 세미나·스터디·행사 기획 및 동아리 운영 · 2024 충북대학교 소프트웨어학부 최우수 학술동아리 선정</span>
+</span>
+</button>
+</li>
 <li class="bio-band academy is-ongoing" data-start="2026-01-18" data-end="present" style="--start: 90.46575%; --duration: 6.71233%;">
 <button type="button" class="bio-trigger bio-band-body">
 <span class="sr-only">
@@ -174,6 +184,16 @@ DEVELOPER · 박준유</p>
 </ol>
 
 <ol class="bio-events" aria-label="날짜순 수상 및 자격 취득">
+<li class="bio-event award" data-date="2024">
+<button type="button" class="bio-trigger bio-event-symbol">
+<span class="sr-only">
+<strong data-bio-title>CUVIC · 충북대학교 소프트웨어학부 최우수 학술동아리</strong>
+<span data-bio-date>2024</span>
+<span data-bio-description>2024년 회장 재임 중 CUVIC의 최우수 학술동아리 선정</span>
+</span>
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4.5"/><path d="m8.5 11.5-2 10L12 18l5.5 3.5-2-10"/></svg>
+</button>
+</li>
 <li class="bio-event award" data-date="2025-11-13">
 <button type="button" class="bio-trigger bio-event-symbol">
 <span class="sr-only">
@@ -279,6 +299,23 @@ DEVELOPER · 박준유</p>
 </div>
 </section>
 <section class="resume-section">
+<h3 class="section-heading">동아리 활동</h3>
+<div class="timeline">
+<article>
+<span class="timeline-year">2023<br>— 2026.02.23</span>
+<div>
+<h3>충북대학교 학술동아리 CUVIC</h3>
+<p class="timeline-team">2023년부터 대학 졸업까지 활동</p>
+<p class="bio-highlight"><strong>2024년 회장 역임</strong></p>
+<p>AI·비정형 데이터 처리 및 C/C++, Python, Java 등 다양한 언어의 개발 경험 공유</p>
+<p>기술 세미나·스터디·행사 기획·주최 및 동아리 운영. 부원 간 지식 공유와 협업 장려</p>
+<p>졸업생·재학생 간 교류와 친목 활동을 통한 부원들의 학과 적응 및 진로 탐색 지원</p>
+<p class="bio-highlight"><strong>2024 충북대학교 소프트웨어학부 최우수 학술동아리 선정</strong></p>
+</div>
+</article>
+</div>
+</section>
+<section class="resume-section">
 <h3 class="section-heading">수상</h3>
 <div class="timeline">
 <article>
@@ -297,6 +334,14 @@ DEVELOPER · 박준유</p>
 <p>“멀티모달 기반 졸음 탐지 시스템: 학습 능률 향상 지원 솔루션”으로 수상. Galaxy Watch 7의 HRV와 웹캠 안면 랜드마크를 결합한 AI 모델 구축</p>
 <button class="text-button" data-select="3">수상 프로젝트 보기 <span aria-hidden="true">↗</span>
 </button>
+</div>
+</article>
+<article>
+<span class="timeline-year">2024</span>
+<div>
+<h3>소프트웨어학부 최우수 학술동아리 선정</h3>
+<p class="timeline-team">충북대학교 · CUVIC</p>
+<p>2024년 CUVIC 회장 재임 중 동아리의 최우수 학술동아리 선정</p>
 </div>
 </article>
 </div>
@@ -761,7 +806,7 @@ DEVELOPER · 박준유</p>
 <noscript>
 <div class="noscript-note">스크롤로 모든 내용을 읽을 수 있습니다. 움직임 효과와 드래그 탐색은 JavaScript를 켜면 사용할 수 있습니다.</div>
 </noscript>
-<script src="./script.js?v=edad326a2d" type="module">
+<script src="./script.js?v=1974ae95cf" type="module">
 </script>
 </body>
 </html>

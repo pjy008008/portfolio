@@ -3,6 +3,7 @@
   --bio-paper: #1a1c1b;
   --bio-silver: #d9d9d2;
   --bio-bluegray: #a8b7c3;
+  --bio-lavender: #b7b3cc;
   --bio-champagne: #d5c2a8;
   --bio-flag: #c5cbc1;
   margin: 30px 0 36px;
@@ -47,6 +48,7 @@
 }
 .bio-legend .education { --bio-color: var(--bio-silver); }
 .bio-legend .service { --bio-color: var(--bio-bluegray); }
+.bio-legend .activity { --bio-color: var(--bio-lavender); }
 .bio-legend .award { --bio-color: var(--bio-champagne); }
 .bio-legend .credential { --bio-color: var(--bio-flag); }
 .bio-legend i {
@@ -166,6 +168,13 @@
   --bio-face-fill: #849aadad;
   --bio-face-active-border: #e0edf5;
   --bio-face-active-fill: #a1b5c7c9;
+}
+.bio-band.activity .bio-band-body {
+  --bio-face-layer: 2;
+  --bio-face-border: #c5bddacc;
+  --bio-face-fill: #8f89ae9c;
+  --bio-face-active-border: #e8e2f5;
+  --bio-face-active-fill: #aaa3c9c9;
 }
 .bio-band.academy .bio-band-body {
   --bio-face-layer: 3;
@@ -343,6 +352,10 @@
   .bio-chart-note { font-size: .64rem; }
 }
 @media (max-width: 480px) {
+  /* Seven milestones occupy 200px while retaining a 26 x 28px hit target. */
+  .bio-events { gap: 3px; }
+  .bio-event { flex-basis: 26px; width: 26px; }
+  .bio-event-symbol { width: 26px; }
   .bio-years { font-size: 9px; }
   .bio-years > span:not(:nth-child(3n + 1)) { color: transparent; }
 }
@@ -359,6 +372,7 @@
     --bio-paper: #fff;
     --bio-silver: #6f766d;
     --bio-bluegray: #566e81;
+    --bio-lavender: #766b89;
     --bio-champagne: #866744;
     --bio-flag: #4f5d49;
     margin: 18px 0;
@@ -380,6 +394,7 @@
     --bio-face-fill: #e1e4de;
   }
   .bio-band.service .bio-band-body { --bio-face-border: #6a8294; --bio-face-fill: #a8bccc; }
+  .bio-band.activity .bio-band-body { --bio-face-border: #807796; --bio-face-fill: #bdb8ce; }
   .bio-band.academy .bio-band-body { --bio-face-border: #77796c; --bio-face-fill: #c9cbb5; }
   .bio-band-body::after,
   .bio-band-body:hover::after,

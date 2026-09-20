@@ -1,4 +1,4 @@
-import {initBioTimeline} from './bio-timeline.js?v=bcffadfbbd';
+import {initBioTimeline} from './bio-timeline.js?v=b8aff8bbdd';
 import {initMaterialInteractions} from './material-interactions.js?v=ce241d5078';
 import {createDepthReveal} from './depth-reveal.js';
 import {initAmbient} from './ambient.js?v=a4a6e13449';
