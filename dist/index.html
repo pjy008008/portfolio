@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css?v=3dd1272fcc">
-<link rel="stylesheet" href="./bio-timeline.css?v=d014091f88">
+<link rel="stylesheet" href="./bio-timeline.css?v=f35a751e3f">
 </head>
 <body>
 <a class="skip-link" href="#panel-profile">선택한 내용으로 건너뛰기</a>
@@ -136,46 +136,102 @@ DEVELOPER · 박준유</p>
 <div class="bio-plot">
 <ol class="bio-periods" aria-label="학력·교육 및 군복무 기간">
 <li class="bio-band school" data-start="2017-03-02" data-end="2020-01-31" style="--start: 1.64384%; --duration: 29.17584%;">
-<span class="bio-band-body"><strong>남대전고등학교</strong></span>
-<span class="bio-band-dates"><time datetime="2017-03-02">2017.03.02</time> — <time datetime="2020-01-31">2020.01.31</time></span>
+<button type="button" class="bio-trigger bio-band-body">
+<span class="sr-only">
+<strong data-bio-title>남대전고등학교</strong>
+<span data-bio-date><time datetime="2017-03-02">2017.03.02</time> — <time datetime="2020-01-31">2020.01.31</time></span>
+<span data-bio-description>인문 계열 · 졸업</span>
+</span>
+</button>
 </li>
 <li class="bio-band university" data-start="2020-03-02" data-end="2026-02-23" style="--start: 31.66667%; --duration: 59.78539%;">
-<span class="bio-band-body"><strong>충북대학교 · 소프트웨어 전공</strong></span>
-<span class="bio-band-dates"><time datetime="2020-03-02">2020.03.02</time> — <time datetime="2026-02-23">2026.02.23</time></span>
+<button type="button" class="bio-trigger bio-band-body">
+<span class="sr-only">
+<strong data-bio-title>충북대학교 · 소프트웨어 전공</strong>
+<span data-bio-date><time datetime="2020-03-02">2020.03.02</time> — <time datetime="2026-02-23">2026.02.23</time></span>
+<span data-bio-description>졸업 · 전체 학점 4.1 / 4.5 · 전공 학점 4.12 / 4.5 · 총 140학점 이수</span>
+</span>
+</button>
 </li>
 <li class="bio-band service" data-start="2021-01-25" data-end="2022-07-24" style="--start: 40.65753%; --duration: 14.93151%;">
-<span class="bio-band-body"><strong>육군 복무</strong></span>
-<span class="bio-band-dates"><time datetime="2021-01-25">2021.01.25</time> — <time datetime="2022-07-24">2022.07.24</time></span>
+<button type="button" class="bio-trigger bio-band-body">
+<span class="sr-only">
+<strong data-bio-title>육군 복무</strong>
+<span data-bio-date><time datetime="2021-01-25">2021.01.25</time> — <time datetime="2022-07-24">2022.07.24</time></span>
+<span data-bio-description>육군 · 현역병 · 보병 · 병장 만기제대</span>
+</span>
+</button>
 </li>
 <li class="bio-band academy is-ongoing" data-start="2026-01-18" data-end="present" style="--start: 90.46575%; --duration: 6.71233%;">
-<span class="bio-band-body"><strong>SSAFY</strong></span>
-<span class="bio-band-dates"><time datetime="2026-01-18">2026.01.18</time> — <span>현재</span></span>
+<button type="button" class="bio-trigger bio-band-body">
+<span class="sr-only">
+<strong data-bio-title>삼성청년 SW·AI 아카데미 (SSAFY)</strong>
+<span data-bio-date><time datetime="2026-01-18">2026.01.18</time> — <span>현재</span></span>
+<span data-bio-description>Web Java 전공반 · 교육 진행 중</span>
+</span>
+</button>
 </li>
 </ol>
 <ol class="bio-events" aria-label="수상 및 자격 취득">
-<li class="bio-event award" data-date="2025-11-13" style="--at: 88.65753%; --flag-y: 18px;" title="충북대학교 소프트웨어학부 캡스톤 디자인 우수상 · 2025.11.13">
-<span class="bio-event-label"><time datetime="2025-11-13">2025.11.13</time><strong>캡스톤 우수상</strong></span>
-<span class="bio-event-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4.5"/><path d="m8.5 11.5-2 10L12 18l5.5 3.5-2-10"/></svg></span>
+<li class="bio-event award" data-date="2025-11-13" style="--at: 88.65753%; --flag-y: 18px;">
+<button type="button" class="bio-trigger bio-event-symbol">
+<span class="sr-only">
+<strong data-bio-title>충북대학교 소프트웨어학부 캡스톤 디자인 우수상</strong>
+<span data-bio-date><time datetime="2025-11-13">2025.11.13</time></span>
+<span data-bio-description>충북대학교 · 멀티모달 기반 졸음 탐지 시스템으로 수상</span>
+</span>
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4.5"/><path d="m8.5 11.5-2 10L12 18l5.5 3.5-2-10"/></svg>
+</button>
 </li>
-<li class="bio-event credential" data-date="2025-12-24" style="--at: 89.78082%; --flag-y: 54px;" title="정보처리기사 · 2025.12.24">
-<span class="bio-event-label"><time datetime="2025-12-24">2025.12.24</time><strong>정보처리기사</strong></span>
-<span class="bio-event-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3h14l-3 4 3 4H5"/></svg></span>
+<li class="bio-event credential" data-date="2025-12-24" style="--at: 89.78082%; --flag-y: 54px;">
+<button type="button" class="bio-trigger bio-event-symbol">
+<span class="sr-only">
+<strong data-bio-title>정보처리기사</strong>
+<span data-bio-date><time datetime="2025-12-24">2025.12.24</time></span>
+<span data-bio-description>한국산업인력공단 · 자격 취득</span>
+</span>
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3h14l-3 4 3 4H5"/></svg>
+</button>
 </li>
-<li class="bio-event credential" data-date="2026-02-21" style="--at: 91.39726%; --flag-y: 90px;" title="OPIc 영어 Intermediate Mid 2 · 2026.02.21">
-<span class="bio-event-label"><time datetime="2026-02-21">2026.02.21</time><strong>OPIc · IM2</strong></span>
-<span class="bio-event-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3h14l-3 4 3 4H5"/></svg></span>
+<li class="bio-event credential" data-date="2026-02-21" style="--at: 91.39726%; --flag-y: 90px;">
+<button type="button" class="bio-trigger bio-event-symbol">
+<span class="sr-only">
+<strong data-bio-title>OPIc 영어 Intermediate Mid 2</strong>
+<span data-bio-date><time datetime="2026-02-21">2026.02.21</time></span>
+<span data-bio-description>ACTFL · Intermediate Mid 2</span>
+</span>
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3h14l-3 4 3 4H5"/></svg>
+</button>
 </li>
-<li class="bio-event credential" data-date="2026-04-03" style="--at: 92.52055%; --flag-y: 126px;" title="삼성 SW 역량테스트 B형(Professional) · 2026.04.03">
-<span class="bio-event-label"><time datetime="2026-04-03">2026.04.03</time><strong>B형 Professional</strong></span>
-<span class="bio-event-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3h14l-3 4 3 4H5"/></svg></span>
+<li class="bio-event credential" data-date="2026-04-03" style="--at: 92.52055%; --flag-y: 126px;">
+<button type="button" class="bio-trigger bio-event-symbol">
+<span class="sr-only">
+<strong data-bio-title>삼성 SW 역량테스트 B형(Professional)</strong>
+<span data-bio-date><time datetime="2026-04-03">2026.04.03</time></span>
+<span data-bio-description>삼성전자 · Professional 취득</span>
+</span>
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3h14l-3 4 3 4H5"/></svg>
+</button>
 </li>
-<li class="bio-event credential" data-date="2026-06-19" style="--at: 94.63014%; --flag-y: 162px;" title="SQLD · 2026.06.19">
-<span class="bio-event-label"><time datetime="2026-06-19">2026.06.19</time><strong>SQLD</strong></span>
-<span class="bio-event-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3h14l-3 4 3 4H5"/></svg></span>
+<li class="bio-event credential" data-date="2026-06-19" style="--at: 94.63014%; --flag-y: 162px;">
+<button type="button" class="bio-trigger bio-event-symbol">
+<span class="sr-only">
+<strong data-bio-title>SQLD</strong>
+<span data-bio-date><time datetime="2026-06-19">2026.06.19</time></span>
+<span data-bio-description>한국데이터산업진흥원 · 자격 취득</span>
+</span>
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3h14l-3 4 3 4H5"/></svg>
+</button>
 </li>
-<li class="bio-event award" data-date="2026-06-26" style="--at: 94.82192%; --flag-y: 198px;" title="SSAFY 성적 우수상 · 2026.06.26">
-<span class="bio-event-label"><time datetime="2026-06-26">2026.06.26</time><strong>SSAFY 우수상</strong></span>
-<span class="bio-event-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4.5"/><path d="m8.5 11.5-2 10L12 18l5.5 3.5-2-10"/></svg></span>
+<li class="bio-event award" data-date="2026-06-26" style="--at: 94.82192%; --flag-y: 198px;">
+<button type="button" class="bio-trigger bio-event-symbol">
+<span class="sr-only">
+<strong data-bio-title>SSAFY 성적 우수상</strong>
+<span data-bio-date><time datetime="2026-06-26">2026.06.26</time></span>
+<span data-bio-description>삼성전자 주식회사 · Web Java 전공반 1학기 성적 우수상</span>
+</span>
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4.5"/><path d="m8.5 11.5-2 10L12 18l5.5 3.5-2-10"/></svg>
+</button>
 </li>
 </ol>
 <div class="bio-years" aria-hidden="true">
@@ -190,7 +246,7 @@ DEVELOPER · 박준유</p>
 <span>2025</span>
 <span>2026</span>
 </div></div></div></div>
-<p class="bio-chart-note" id="bio-chart-note">겹친 막대는 동시 재학·교육·복무 기간, 메달은 수상, 깃발은 자격 취득. SSAFY 교육 진행 중</p>
+<p class="bio-chart-note" id="bio-chart-note">선·아이콘에 마우스를 올리거나 선택해 상세 이력 확인</p>
 </section>
 <section class="resume-section">
 <h3 class="section-heading">학력·교육</h3>
@@ -704,7 +760,7 @@ DEVELOPER · 박준유</p>
 <noscript>
 <div class="noscript-note">스크롤로 모든 내용을 읽을 수 있습니다. 움직임 효과와 드래그 탐색은 JavaScript를 켜면 사용할 수 있습니다.</div>
 </noscript>
-<script src="./script.js?v=209ef83931" type="module">
+<script src="./script.js?v=3ce1b9f123" type="module">
 </script>
 </body>
 </html>
