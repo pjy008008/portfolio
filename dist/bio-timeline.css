@@ -1,4 +1,4 @@
-/* Compact parallel periods with a single row of milestone icons. */
+/* Overlapping periods with stable hit targets and date-linked milestones. */
 .bio-overview {
   --bio-paper: #1a1c1b;
   --bio-silver: #d9d9d2;
@@ -88,7 +88,7 @@
 .bio-plot { position: relative; height: 146px; }
 .bio-periods {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   inset: 0;
   display: block;
   margin: 0;
@@ -109,27 +109,34 @@
 
 .bio-band {
   position: absolute;
-  top: 84px;
+  z-index: auto;
+  top: 76px;
   left: var(--start, 0%);
   width: var(--duration, 0%);
   min-width: 2px;
-  height: 14px;
+  height: 20px;
   margin: 0;
   padding: 0;
 }
 .bio-band-body {
+  --bio-face-layer: 1;
+  --bio-face-border: #d9d9d29e;
+  --bio-face-fill: #d9d9d23b;
+  --bio-face-active-border: #f3f2e8;
+  --bio-face-active-fill: #d9d9d26b;
   position: absolute;
+  z-index: auto;
   inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
-  border: 1px solid #d9d9d29e;
+  border: 0;
   border-radius: 2px;
-  background: #d9d9d23b;
+  background: transparent;
   color: #eceee8;
 }
-/* The visible strip stays slim while its invisible vertical hit area stays usable. */
+/* Hit targets stay in place. Only the non-interactive visual face is raised. */
 .bio-band-body::before {
   content: '';
   position: absolute;
@@ -137,26 +144,74 @@
   right: 0;
   left: 0;
   height: 100%;
-  min-height: 28px;
+  min-height: 32px;
   transform: translateY(-50%);
 }
-.bio-band.university .bio-band-body { background: #c5cec743; }
-.bio-band.service { z-index: 2; top: 52px; height: 14px; }
-.bio-band.service .bio-band-body { border-color: #bfd1dccc; background: #849aadad; }
-.bio-band.academy { z-index: 3; top: 52px; height: 14px; }
-.bio-band.academy .bio-band-body { border-color: #e9e5d5; border-right-style: dashed; background: #dedbd28a; }
+.bio-band-body::after {
+  content: '';
+  position: absolute;
+  z-index: var(--bio-face-layer);
+  inset: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--bio-face-border);
+  border-radius: 2px;
+  background: var(--bio-face-fill);
+  pointer-events: none;
+  transition: transform .16s ease, border-color .16s, background-color .16s, box-shadow .16s;
+}
+.bio-band.university .bio-band-body { --bio-face-fill: #c5cec743; }
+.bio-band.service .bio-band-body {
+  --bio-face-layer: 2;
+  --bio-face-border: #bfd1dccc;
+  --bio-face-fill: #849aadad;
+  --bio-face-active-border: #e0edf5;
+  --bio-face-active-fill: #a1b5c7c9;
+}
+.bio-band.academy .bio-band-body {
+  --bio-face-layer: 3;
+  --bio-face-border: #e9e5d5;
+  --bio-face-fill: #dedbd28a;
+  --bio-face-active-border: #fffdf4;
+  --bio-face-active-fill: #e6e2d5b3;
+}
 .bio-band.academy .bio-band-body::before { left: 50%; right: auto; width: max(100%, 28px); transform: translate(-50%, -50%); }
-.bio-band-body:hover,
-.bio-band-body.is-active { border-color: #f3f2e8; background: #d9d9d26b; }
-.bio-band.service .bio-band-body:hover,
-.bio-band.service .bio-band-body.is-active { border-color: #e0edf5; background: #a1b5c7c9; }
-.bio-band.academy .bio-band-body:hover,
-.bio-band.academy .bio-band-body.is-active { border-color: #fffdf4; background: #e6e2d5b3; }
+.bio-band.academy .bio-band-body::after { border-right-style: dashed; }
+.bio-band-body:hover::after,
+.bio-band-body.is-active::after,
+.bio-band-body:focus-visible::after {
+  z-index: 5;
+  border-color: var(--bio-face-active-border);
+  background: var(--bio-face-active-fill);
+  box-shadow: 0 5px 10px #0006;
+  transform: translateY(-6px);
+}
+.bio-band-body:focus-visible { outline: none; }
+.bio-band-body:focus-visible::after { outline: 2px solid var(--accent, #d5c2a8); outline-offset: 3px; }
 
-/* Icons form one compact row. Exact milestone dates remain in their tooltips. */
+.bio-connectors {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.bio-connector {
+  fill: none;
+  stroke: #c5cbc160;
+  stroke-width: 1px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.bio-connector.award { stroke: #d5c2a86b; }
+.bio-connector.credential { stroke: #c5cbc160; }
+
+/* The compact icon row connects to exact event dates through the SVG beneath it. */
 .bio-events {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 8px;
   right: 0;
   left: 0;
@@ -291,7 +346,13 @@
   .bio-years { font-size: 9px; }
   .bio-years > span:not(:nth-child(3n + 1)) { color: transparent; }
 }
-@media (prefers-reduced-motion: reduce) { .bio-trigger { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .bio-trigger,
+  .bio-band-body::after { transition: none; }
+  .bio-band-body:hover::after,
+  .bio-band-body.is-active::after,
+  .bio-band-body:focus-visible::after { transform: none; }
+}
 
 @media print {
   .bio-overview {
@@ -314,15 +375,27 @@
   .bio-chart-scroll { overflow: visible; border-color: #bbb; }
   .bio-chart { min-width: 0; padding: 0 8px; }
   .bio-band-body,
-  .bio-band-body:hover,
-  .bio-band-body.is-active { border-color: #757e73; background: #e1e4de; }
-  .bio-band.university .bio-band-body { background: #d1d7cfb3; }
-  .bio-band.service .bio-band-body,
-  .bio-band.service .bio-band-body:hover,
-  .bio-band.service .bio-band-body.is-active { border-color: #6a8294; background: #8da6bcb3; }
-  .bio-band.academy .bio-band-body,
-  .bio-band.academy .bio-band-body:hover,
-  .bio-band.academy .bio-band-body.is-active { border-color: #77796c; background: #c9cbb5b3; }
+  .bio-band.university .bio-band-body {
+    --bio-face-border: #757e73;
+    --bio-face-fill: #e1e4de;
+  }
+  .bio-band.service .bio-band-body { --bio-face-border: #6a8294; --bio-face-fill: #a8bccc; }
+  .bio-band.academy .bio-band-body { --bio-face-border: #77796c; --bio-face-fill: #c9cbb5; }
+  .bio-band-body::after,
+  .bio-band-body:hover::after,
+  .bio-band-body.is-active::after,
+  .bio-band-body:focus-visible::after {
+    z-index: var(--bio-face-layer);
+    border-color: var(--bio-face-border);
+    background: var(--bio-face-fill);
+    box-shadow: none;
+    outline: none;
+    transform: none;
+    transition: none;
+  }
+  .bio-connector,
+  .bio-connector.credential { stroke: #8b9385; }
+  .bio-connector.award { stroke: #a58d6e; }
   .bio-trigger:focus-visible { outline: none; }
   .bio-event-symbol,
   .bio-event-symbol:hover,
