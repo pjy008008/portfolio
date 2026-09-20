@@ -27,15 +27,31 @@ export function initBioTimeline(now = new Date()) {
   return initBioTooltips();
 }
 
-// Icons stay separated; each curve ends at the recorded date or year tick.
+// Keep each icon at its date unless its neighbour or the chart edge needs room.
+export function layoutTimelineEvents(targets, width, iconWidth, gap) {
+  const half = iconWidth / 2;
+  const spacing = iconWidth + gap;
+  const centers = targets.map(target => Math.max(half, Math.min(width - half, target)));
+  for (let index = 1; index < centers.length; index++) {
+    centers[index] = Math.max(centers[index], centers[index - 1] + spacing);
+  }
+  if (centers.length) centers[centers.length - 1] = Math.min(centers.at(-1), width - half);
+  for (let index = centers.length - 2; index >= 0; index--) {
+    centers[index] = Math.min(centers[index], centers[index + 1] - spacing);
+  }
+  return centers;
+}
+
+// Each connector still ends at the recorded date after collision adjustment.
 const connectorObservers = new WeakMap();
 
 function initBioConnectors(chart) {
   if (connectorObservers.has(chart)) return;
   const plot = chart.querySelector('.bio-plot');
+  const eventRow = chart.querySelector('.bio-events');
   const svg = chart.querySelector('.bio-connectors');
   const baseline = chart.querySelector('.bio-band');
-  if (!plot || !svg || !baseline) return;
+  if (!plot || !eventRow || !svg || !baseline) return;
   const firstYear = Number(chart.dataset.firstYear);
   const endYear = Number(chart.dataset.endYear);
   const records = [...chart.querySelectorAll('.bio-event')].map(event => {
@@ -52,6 +68,10 @@ function initBioConnectors(chart) {
     if (!bounds.width || !bounds.height) return;
     const width = plot.clientWidth;
     const height = plot.clientHeight;
+    const iconWidth = records[0]?.event.offsetWidth || 0;
+    const gap = parseFloat(getComputedStyle(eventRow).getPropertyValue('--bio-event-gap')) || 0;
+    const centers = layoutTimelineEvents(records.map(record => record.at / 100 * width), width, iconWidth, gap);
+    records.forEach(({event}, index) => event.style.setProperty('--event-x', `${centers[index]}px`));
     // Work in layout units even while the surrounding reveal is scaled.
     const scaleX = width / bounds.width;
     const scaleY = height / bounds.height;
