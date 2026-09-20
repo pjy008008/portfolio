@@ -18,8 +18,57 @@ export function initBioTimeline(now = new Date()) {
       period.style.setProperty('--start', `${start}%`);
       period.style.setProperty('--duration', `${Math.max(0, end - start)}%`);
     });
+    initBioConnectors(chart);
   });
   return initBioTooltips();
+}
+
+// Icons stay separated; each curve ends at the actual milestone date.
+const connectorObservers = new WeakMap();
+
+function initBioConnectors(chart) {
+  if (connectorObservers.has(chart)) return;
+  const plot = chart.querySelector('.bio-plot');
+  const svg = chart.querySelector('.bio-connectors');
+  const baseline = chart.querySelector('.bio-band');
+  if (!plot || !svg || !baseline) return;
+  const firstYear = Number(chart.dataset.firstYear);
+  const endYear = Number(chart.dataset.endYear);
+  const records = [...chart.querySelectorAll('.bio-event')].map(event => {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('class', `bio-connector ${event.classList.contains('award') ? 'award' : 'credential'}`);
+    path.dataset.date = event.dataset.date;
+    return {event, path, at: timelinePosition(event.dataset.date, firstYear, endYear)};
+  });
+  svg.replaceChildren(...records.map(record => record.path));
+  let frame = 0;
+  const draw = () => {
+    frame = 0;
+    const bounds = plot.getBoundingClientRect();
+    if (!bounds.width || !bounds.height) return;
+    const width = plot.clientWidth;
+    const height = plot.clientHeight;
+    // Work in layout units even while the surrounding reveal is scaled.
+    const scaleX = width / bounds.width;
+    const scaleY = height / bounds.height;
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    const endY = (baseline.getBoundingClientRect().top - bounds.top) * scaleY;
+    records.forEach(({event, path, at}) => {
+      const icon = event.querySelector('.bio-event-symbol').getBoundingClientRect();
+      const startX = (icon.left + icon.width / 2 - bounds.left) * scaleX;
+      const startY = (icon.bottom - bounds.top) * scaleY + 2;
+      const endX = at / 100 * width;
+      const middleY = (startY + endY) / 2;
+      path.setAttribute('d', `M ${startX} ${startY} C ${startX} ${middleY}, ${endX} ${middleY}, ${endX} ${endY}`);
+    });
+  };
+  const schedule = () => {
+    if (!frame) frame = requestAnimationFrame(draw);
+  };
+  const observer = new ResizeObserver(schedule);
+  observer.observe(plot);
+  connectorObservers.set(chart, observer);
+  schedule();
 }
 
 let disposeBioTooltips = null;
