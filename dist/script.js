@@ -12,6 +12,7 @@ const items = [...document.querySelectorAll('.reel-item')];
 const sections = [...document.querySelectorAll('.detail-panel')];
 const viewport = document.querySelector('#reel-viewport');
 const scene = document.querySelector('.reel-scene');
+const navigationHint = document.querySelector('.reel-hint');
 const keys = sections.map(section => section.id.replace('panel-', ''));
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 let selected = 0;
@@ -28,6 +29,19 @@ let navigationTimer = 0;
 let announceTimer = 0;
 let suppressClickUntil = 0;
 const pointers = new Set();
+let hintDismissed = false;
+
+function syncNavigationHint() {
+  if (!navigationHint) return;
+  navigationHint.hidden = hintDismissed || compact || selected !== 0 || scrollY > 24;
+  navigationHint.classList.toggle('is-paused', document.hidden);
+}
+function dismissNavigationHint() {
+  if (hintDismissed) return;
+  hintDismissed = true;
+  syncNavigationHint();
+}
+document.addEventListener('visibilitychange', syncNavigationHint);
 
 function reducedMotion() { return motionPreference.matches; }
 function scrollOffset() {
@@ -63,6 +77,7 @@ function animateToSelection() {
   else if (!reelFrame) reelFrame = requestAnimationFrame(animate);
 }
 function syncRailLayout() {
+  syncNavigationHint();
   scene.setAttribute('aria-label', compact
     ? '포트폴리오 목차, 좌우 방향키로 이동'
     : '포트폴리오 목차, 위아래로 드래그하거나 방향키로 이동');
@@ -104,6 +119,7 @@ function finishNavigation() {
 }
 function navigate(index, {focus = false, instant = false} = {}) {
   if (!Number.isInteger(index) || index < 0 || index >= sections.length) return;
+  if (!instant) dismissNavigationHint();
   navigationTarget = index;
   setActive(index, {focus, announce: !instant});
   const top = sectionOffsets()[index];
@@ -124,6 +140,7 @@ function queueScroll() {
   if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScroll);
 }
 window.addEventListener('scroll', () => {
+  if (scrollY > 24) dismissNavigationHint();
   queueScroll();
   if (navigationTarget !== null) {
     clearTimeout(navigationTimer);
@@ -193,6 +210,7 @@ viewport.addEventListener('pointermove', event => {
   if (!gesture.moved && Math.abs(dx) > 18 && Math.abs(dx) > Math.abs(dy)) { settleDrag(false); return; }
   if (!gesture.moved && Math.abs(dy) > 5) {
     gesture.moved = true;
+    dismissNavigationHint();
     viewport.setPointerCapture(event.pointerId);
     viewport.classList.add('is-dragging');
   }
