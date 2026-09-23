@@ -124,10 +124,9 @@ h2 { font-size: clamp(1.9rem, 3vw, 3.2rem); margin: 21px 0 24px; }
 .project-body > h2 { font-size: clamp(1.8rem, 2.8vw, 3rem); }.project-body .dim { color: #9a9b9d; }
 .chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 23px 0 0; }
 .chips span { border: 1px solid #cfd7d023; background: transparent; border-radius: 2px; padding: 6px 10px; color: #a4aea7; font-size: .68rem; }
-.concept-path, .signal-concept, .state-concept { width: 100%; max-width: 290px; justify-self: end; text-align: center; }
-.concept-path > span { display: block; padding: 14px; border: 1px solid #2d3a3a33; border-radius: 2px; font-size: .58rem; letter-spacing: 1.3px; color: #414944; background: #ffffff17; box-shadow: none; }
-.concept-path strong { display: block; color: #2f3736; font-weight: 500; font-size: .78rem; letter-spacing: 0; margin-top: 5px; }
-.concept-path i, .signal-concept > i { display: block; font-style: normal; font-size: .9rem; line-height: 1.6; color: #64706a; }
+.idea-banner { grid-template-columns: minmax(0, 1fr); }
+.signal-concept, .state-concept { width: 100%; max-width: 290px; justify-self: end; text-align: center; }
+.signal-concept > i { display: block; font-style: normal; font-size: .9rem; line-height: 1.6; color: #64706a; }
 .signal-concept > div { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }.signal-concept > div > span { padding: 19px 6px; border: 1px solid #2d3a3a33; border-radius: 2px; background: #ffffff1f; font-size: .55rem; letter-spacing: 1.1px; color: #414944; }
 .signal-concept strong { display: block; font-weight: 400; font-size: 1.4rem; margin-top: 6px; color: #293b3c; }.fusion-node { display: block; padding: 14px; border: 1px solid #2d3a3a33; border-radius: 2px; background: #ffffff1a; font-size: .59rem; letter-spacing: 1.2px; color: #3a5251; }.signal-concept .level-range { font-size: 1.8rem; letter-spacing: 7px; }
 .state-concept { display: grid; gap: 13px; text-align: left; }.state-concept > div { padding: 23px; border: 1px solid #3f382d33; border-radius: 2px; background: #ffffff14; display: grid; gap: 8px; }.state-concept small { color: #414944; font-size: .58rem; letter-spacing: 1.2px; }.state-concept strong { color: #343c38; font-size: 1.3rem; font-weight: 500; }.state-concept span { font-size: .7rem; color: #414944; }
@@ -169,7 +168,7 @@ details { border-top: 1px solid var(--line); }summary { cursor: pointer; list-st
 @media (max-width: 850px) and (min-width: 741px) {
   .hero-composition { grid-template-columns: 1fr; position: relative; min-height: 500px; }.hero-copy { max-width: 380px; }.hero-copy h1 { font-size: 3rem; }
   .hero-visual { position: absolute; z-index: -1; width: 330px; right: -40px; top: 50px; opacity: .38; }.hero-copy .body-copy { text-shadow: 0 1px 15px #0e0d0d; }
-  .project-banner { grid-template-columns: 1fr; }.concept-path, .signal-concept, .state-concept { display: none; }.project-banner h2 { font-size: 3.2rem; }.fact-grid { grid-template-columns: 1fr; }
+  .project-banner { grid-template-columns: 1fr; }.signal-concept, .state-concept { display: none; }.project-banner h2 { font-size: 3.2rem; }.fact-grid { grid-template-columns: 1fr; }
   .resume-metrics { grid-template-columns: 1fr; }.resume-metrics > div + div { border-left: 0; padding: 12px 0 0; }.timeline article { grid-template-columns: 1fr; gap: 10px; }.architecture-summary article { grid-template-columns: 1fr; gap: 8px; }
 }
 @media (max-width: 740px) {
@@ -182,7 +181,7 @@ details { border-top: 1px solid var(--line); }summary { cursor: pointer; list-st
   .hero-visual { width: min(100%, 430px); max-height: 390px; margin: -2px auto 18px; }
   .hero-body > .fact-grid { padding: 20px; gap: 21px 15px; }.hero-body > .fact-grid dd { font-size: .69rem; }
   h2 { font-size: 1.85rem; letter-spacing: -1.2px; }.body-copy { font-size: .84rem; }.project-body, .resume-body, .contact-body { padding: 26px 22px; border-radius: 5px; }.project-body > h2 { font-size: 1.7rem; }.project-marker { font-size: .43rem; gap: 10px; letter-spacing: 1.3px; margin-bottom: 13px; }
-  .project-banner { grid-template-columns: 1fr; min-height: 280px; padding: 30px 24px; border-radius: 5px; }.project-banner h2 { font-size: clamp(2.6rem, 9vw, 3.8rem); letter-spacing: -2px; margin: 25px 0 20px; }.project-banner p { font-size: .76rem; }.concept-path, .signal-concept, .state-concept { display: none; }
+  .project-banner { grid-template-columns: 1fr; min-height: 280px; padding: 30px 24px; border-radius: 5px; }.project-banner h2 { font-size: clamp(2.6rem, 9vw, 3.8rem); letter-spacing: -2px; margin: 25px 0 20px; }.project-banner p { font-size: .76rem; }.signal-concept, .state-concept { display: none; }
   .project-body { margin-top: 12px; }.fact-grid { grid-template-columns: 1fr; gap: 20px; }.fact-grid dd { font-size: .77rem; }.chips { gap: 6px; }.chips span { padding: 5px 8px; font-size: .6rem; }
   .resume-metrics { grid-template-columns: 1fr; gap: 17px; margin: 28px 0; padding: 22px 0; }.resume-metrics > div + div { border-left: 0; padding: 0; }.resume-metrics strong { font-size: 1.55rem; }.resume-metrics span { font-size: .66rem; margin-top: 2px; }
   .section-heading { font-size: .84rem; margin-top: 29px; }.architecture-summary article { grid-template-columns: 1fr; gap: 7px; padding: 18px; }.architecture-summary p { font-size: .74rem; }.case-study > summary { padding: 18px 15px; gap: 10px; font-size: .76rem; }.case-study > summary > span:first-child { gap: 10px; }.project-story { padding: 0 17px 23px; }.project-story p, .project-story li { font-size: .79rem; }.disclosure-icon { flex-basis: 20px; height: 20px; }
