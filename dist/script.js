@@ -1,4 +1,5 @@
 import {initBioTimeline} from './bio-timeline.js?v=5a16367486';
+import {initProjectShowcase} from './project-showcase.js?v=d2bd7f6dff';
 import {initMaterialInteractions} from './material-interactions.js?v=ce241d5078';
 import {createDepthReveal} from './depth-reveal.js';
 import {initAmbient} from './ambient.js?v=a4a6e13449';
@@ -7,6 +8,7 @@ import {reelGeometry, reelPose, cursorFromDrag, sectionAtScroll, scrollPositionF
 initAmbient(document.querySelector('#ambient-canvas'));
 initMaterialInteractions();
 initBioTimeline();
+initProjectShowcase();
 
 const items = [...document.querySelectorAll('.reel-item')];
 const sections = [...document.querySelectorAll('.detail-panel')];
