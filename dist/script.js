@@ -1,5 +1,5 @@
 import {initBioTimeline} from './bio-timeline.js?v=5a16367486';
-import {initProjectShowcase} from './project-showcase.js?v=71d2ef694d';
+import {initProjectShowcase} from './project-showcase.js?v=d70b53f8da';
 import {initMaterialInteractions} from './material-interactions.js?v=ce241d5078';
 import {createDepthReveal} from './depth-reveal.js';
 import {initAmbient} from './ambient.js?v=a4a6e13449';

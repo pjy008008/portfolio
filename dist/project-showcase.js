@@ -6,6 +6,42 @@ export function initProjectShowcase() {
   const tabs = [...tablist.querySelectorAll('[role="tab"]')];
   const panels = tabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
   const video = showcase.querySelector('video');
+  const videoPanel = video.closest('[role="tabpanel"]');
+  const playbackButton = showcase.querySelector('[data-video-playback]');
+  const dialog = showcase.querySelector('.feature-dialog');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let videoInView = false;
+  let userPlayback = null;
+  let printing = false;
+
+  function updatePlaybackButton() {
+    const label = video.paused ? '데모 재생' : '데모 일시정지';
+    playbackButton.dataset.paused = String(video.paused);
+    playbackButton.setAttribute('aria-label', label);
+    playbackButton.title = label;
+  }
+
+  function syncPlayback() {
+    const shouldPlay = videoInView && !videoPanel.hidden && !document.hidden && !printing && !dialog.open &&
+      (userPlayback ?? !reducedMotion.matches);
+    if (!shouldPlay) {
+      video.pause();
+    } else if (video.paused) {
+      // A blocked autoplay attempt leaves the manual play button available.
+      video.play().catch(updatePlaybackButton);
+    }
+  }
+
+  video.muted = true;
+  video.controls = false;
+  playbackButton.hidden = false;
+  playbackButton.addEventListener('click', () => {
+    userPlayback = video.paused;
+    syncPlayback();
+  });
+  video.addEventListener('play', updatePlaybackButton);
+  video.addEventListener('pause', updatePlaybackButton);
+  updatePlaybackButton();
 
   function selectFeature(index) {
     tabs.forEach((tab, position) => {
@@ -14,7 +50,7 @@ export function initProjectShowcase() {
       tab.tabIndex = selected ? 0 : -1;
       panels[position].hidden = !selected;
     });
-    if (video.closest('[role="tabpanel"]').hidden) video.pause();
+    syncPlayback();
   }
 
   tabs.forEach((tab, index) => {
@@ -34,15 +70,22 @@ export function initProjectShowcase() {
   selectFeature(0);
   tablist.hidden = false;
 
-  // Playback is always user-initiated and stops when the demo is no longer visible.
+  // Only animate the selected, visible demo; resume when it returns to view.
   new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting) video.pause();
-  }).observe(video);
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) video.pause();
+    videoInView = entries[0].isIntersecting && entries[0].intersectionRatio >= .05;
+    syncPlayback();
+  }, {threshold: .05}).observe(video);
+  document.addEventListener('visibilitychange', syncPlayback);
+  reducedMotion.addEventListener('change', syncPlayback);
+  window.addEventListener('beforeprint', () => {
+    printing = true;
+    syncPlayback();
+  });
+  window.addEventListener('afterprint', () => {
+    printing = false;
+    syncPlayback();
   });
 
-  const dialog = showcase.querySelector('.feature-dialog');
   if (typeof dialog.showModal !== 'function') return;
   const dialogImage = dialog.querySelector('img');
   const dialogTitle = dialog.querySelector('h4');
@@ -71,6 +114,7 @@ export function initProjectShowcase() {
       dialogTitle.textContent = link.dataset.screenTitle;
       resetZoom();
       dialog.showModal();
+      syncPlayback();
       document.documentElement.classList.add('has-feature-dialog');
     });
   });
@@ -88,11 +132,11 @@ export function initProjectShowcase() {
   });
   dialog.addEventListener('close', () => {
     document.documentElement.classList.remove('has-feature-dialog');
+    syncPlayback();
     resetZoom();
     opener?.focus({preventScroll: true});
   });
   window.addEventListener('beforeprint', () => {
-    video.pause();
     if (dialog.open) dialog.close();
   });
 }
