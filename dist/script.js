@@ -1,5 +1,5 @@
 import {initBioTimeline} from './bio-timeline.js?v=5a16367486';
-import {initProjectShowcase} from './project-showcase.js?v=d2bd7f6dff';
+import {initProjectShowcase} from './project-showcase.js?v=71d2ef694d';
 import {initMaterialInteractions} from './material-interactions.js?v=ce241d5078';
 import {createDepthReveal} from './depth-reveal.js';
 import {initAmbient} from './ambient.js?v=a4a6e13449';
@@ -81,8 +81,8 @@ function animateToSelection() {
 function syncRailLayout() {
   syncNavigationHint();
   scene.setAttribute('aria-label', compact
-    ? '포트폴리오 목차, 좌우 방향키로 이동'
-    : '포트폴리오 목차, 위아래로 드래그하거나 방향키로 이동');
+    ? '포트폴리오 목차, 클릭하거나 좌우 방향키로 이동'
+    : '포트폴리오 목차, 클릭하거나 위아래로 드래그하거나 방향키로 이동');
   if (!compact) return;
   const activeItem = items[selected];
   scene.scrollTo({
