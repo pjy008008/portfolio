@@ -57,7 +57,8 @@ export function initProjectShowcase() {
     imageStage.scrollTo(0, 0);
   }
 
-  showcase.querySelectorAll('.feature-screen-link').forEach(link => {
+  const project = showcase.closest('.project-body');
+  project.querySelectorAll('.feature-screen-link').forEach(link => {
     link.addEventListener('click', event => {
       if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();

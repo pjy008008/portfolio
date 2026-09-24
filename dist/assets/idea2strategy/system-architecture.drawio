@@ -1,0 +1,275 @@
+<mxfile host="app.diagrams.net" agent="Codex" compressed="false">
+  <diagram id="idea2strategy-runtime" name="System Architecture">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1800" pageHeight="1150" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=24;fontStyle=1;labelBackgroundColor=none;" value="Idea2Strategy · System Architecture" vertex="1">
+          <mxGeometry height="34" width="520" x="30" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="aws-boundary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;container=1;connectable=0;pointerEvents=0;verticalAlign=top;align=center;spacingTop=10;spacingLeft=14;fontFamily=Helvetica;fontSize=13;fontStyle=1;fillColor=none;fillOpacity=8;strokeWidth=2;dashed=1;arcSize=12;labelBackgroundColor=none;" value="AWS DEVELOPMENT · TARGET RUNTIME ENVELOPE" vertex="1">
+          <mxGeometry height="1015" width="1510" x="260" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="application-plane" parent="1" style="rounded=1;whiteSpace=wrap;html=1;container=1;connectable=0;pointerEvents=0;verticalAlign=top;align=right;spacingTop=9;spacingLeft=12;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillOpacity=7;strokeWidth=1.5;dashed=1;arcSize=10;labelBackgroundColor=none;fillColor=#5C20FF;" value="APPLICATION PLANE · ALB + DOCKERIZED SERVICES&amp;nbsp; &amp;nbsp;&amp;nbsp;" vertex="1">
+          <mxGeometry height="300" width="1410" x="300" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="async-plane" parent="1" style="rounded=1;whiteSpace=wrap;html=1;container=1;connectable=0;pointerEvents=0;verticalAlign=top;align=right;spacingTop=9;spacingLeft=12;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillOpacity=7;strokeWidth=1.5;dashed=1;arcSize=10;labelBackgroundColor=none;fillColor=#2BFFD9;" value="ASYNC + COMPUTE PLANE&amp;nbsp; &amp;nbsp;" vertex="1">
+          <mxGeometry height="190" width="1410" x="300" y="629" as="geometry" />
+        </mxCell>
+        <mxCell id="shared-plane" parent="1" style="rounded=1;whiteSpace=wrap;html=1;container=1;connectable=0;pointerEvents=0;verticalAlign=top;align=right;spacingTop=9;spacingLeft=12;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillOpacity=7;strokeWidth=1.5;dashed=1;arcSize=10;labelBackgroundColor=none;fillColor=#FF6E2C;" value="SHARED DATA + OPERATIONS PLANE" vertex="1">
+          <mxGeometry height="175" width="1410" x="300" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="e-web-route53" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="route53" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="124" y="152" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-operator-admin" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;dashPattern=7 5;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="admin-mcp" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="512" />
+              <mxPoint x="220" y="532" />
+            </Array>
+            <mxPoint x="124" y="512" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-corp-pipeline" edge="1" parent="1" source="corporate-actions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;dashPattern=7 5;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;labelBackgroundColor=none;fontColor=default;" target="market-pipeline" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="772" />
+              <mxPoint x="240" y="615.06" />
+              <mxPoint x="1412" y="615.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-route53-cloudfront" edge="1" parent="1" source="route53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="cloudfront" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-cloudfront-frontend" edge="1" parent="1" source="cloudfront" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="frontend-s3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-cloudfront-alb" edge="1" parent="1" source="cloudfront" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.8;entryX=0.5;entryY=0;labelBackgroundColor=none;fontColor=default;" target="public-alb" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="171" />
+              <mxPoint x="700" y="280" />
+              <mxPoint x="392" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-alb-api" edge="1" parent="1" source="public-alb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="backend-api" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-api-strategy" edge="1" parent="1" source="backend-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="strategy-control" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-market-redis" edge="1" parent="1" source="market-gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="redis" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-redis-trading" edge="1" parent="1" source="redis" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="trading-worker" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-trading-bot" edge="1" parent="1" source="trading-worker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="bot-evaluation" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-bot-ledger" edge="1" parent="1" source="bot-evaluation" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="official-ledger" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-api-queues" edge="1" parent="1" source="backend-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=0;exitY=0.65;entryX=0.5;entryY=0;labelBackgroundColor=none;fontColor=default;" target="queues" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="391.65" />
+              <mxPoint x="500" y="650" />
+              <mxPoint x="552" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-queues-trading" edge="1" parent="1" source="queues" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="trading-worker" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="552" y="650" />
+              <mxPoint x="920" y="650" />
+              <mxPoint x="920" y="532" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-queues-backtest" edge="1" parent="1" source="queues" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="backtest-api" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-backtest-worker" edge="1" parent="1" source="backtest-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="backtest-worker" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-queues-pipeline" edge="1" parent="1" source="queues" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.3;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="market-pipeline" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="630" y="699" />
+              <mxPoint x="630" y="660" />
+              <mxPoint x="1360" y="660" />
+              <mxPoint x="1360" y="712" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-api-postgres" edge="1" parent="1" source="backend-api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=0;exitY=0.35;entryX=0.5;entryY=0;labelBackgroundColor=none;fontColor=default;" target="postgres" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="490" y="372.35" />
+              <mxPoint x="490" y="835.06" />
+              <mxPoint x="552" y="835.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-ledger-postgres" edge="1" parent="1" source="official-ledger" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="postgres" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1740" y="532" />
+              <mxPoint x="1740" y="1000" />
+              <mxPoint x="490" y="1000" />
+              <mxPoint x="490" y="927.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-pipeline-market-s3" edge="1" parent="1" source="market-pipeline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=1;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="market-s3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1720" y="712" />
+              <mxPoint x="1720" y="927.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-market-s3-backtest-worker" edge="1" parent="1" source="market-s3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=0;exitY=0.5;entryX=1;entryY=0.2;labelBackgroundColor=none;fontColor=default;" target="backtest-worker" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1280" y="927" />
+              <mxPoint x="1280" y="693" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-worker-results" edge="1" parent="1" source="backtest-worker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.8;entryX=1;entryY=0.5;labelBackgroundColor=none;fontColor=default;" target="results-s3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1210" y="731" />
+              <mxPoint x="1210" y="927" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3hL7Q4iWz5_T3obVb0C-3" edge="1" parent="1" source="alpaca" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.96;exitY=0.7;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="664.82" />
+              <mxPoint x="220" y="530.09" />
+            </Array>
+            <mxPoint x="360" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="alpaca" parent="1" style="shape=cloud;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;strokeWidth=2;labelBackgroundColor=none;" value="Alpaca SIP" vertex="1">
+          <mxGeometry height="64" width="64" x="60" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="corporate-actions" parent="1" style="shape=mxgraph.flowchart.document;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;strokeWidth=2;labelBackgroundColor=none;" value="Corporate Actions" vertex="1">
+          <mxGeometry height="64" width="64" x="60" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="route53" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_53;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;" value="Route 53" vertex="1">
+          <mxGeometry height="64" width="64" x="360" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudfront" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudfront;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;" value="CloudFront" vertex="1">
+          <mxGeometry height="64" width="64" x="590" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="frontend-s3" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;" value="Frontend S3" vertex="1">
+          <mxGeometry height="64" width="64" x="820" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="public-alb" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.application_load_balancer;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Public ALB" vertex="1">
+          <mxGeometry height="64" width="64" x="360" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="backend-api" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Backend API" vertex="1">
+          <mxGeometry height="64" width="64" x="540" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="strategy-control" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Strategy Control" vertex="1">
+          <mxGeometry height="64" width="64" x="720" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="backend-worker" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Backend Worker" vertex="1">
+          <mxGeometry height="64" width="64" x="900" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="backend-batch" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Backend Batch" vertex="1">
+          <mxGeometry height="64" width="64" x="1080" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="strategy-runtime" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Strategy Runtime" vertex="1">
+          <mxGeometry height="64" width="64" x="1260" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="p3hL7Q4iWz5_T3obVb0C-4" edge="1" parent="1" source="admin-mcp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="market-gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-mcp" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.systems_manager;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Admin MCP" vertex="1">
+          <mxGeometry height="64" width="64" x="360" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="market-gateway" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Market Gateway" vertex="1">
+          <mxGeometry height="64" width="64" x="540" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="redis" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.elasticache;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Redis 7.4" vertex="1">
+          <mxGeometry height="64" width="64" x="740" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="trading-worker" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Trading Worker" vertex="1">
+          <mxGeometry height="64" width="64" x="940" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="bot-evaluation" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Bot Evaluation" vertex="1">
+          <mxGeometry height="64" width="64" x="1140" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="official-ledger" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Official Ledger" vertex="1">
+          <mxGeometry height="64" width="64" x="1340" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="queues" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sqs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Durable Work Queues" vertex="1">
+          <mxGeometry height="64" width="64" x="520" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="backtest-api" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Backtest API" vertex="1">
+          <mxGeometry height="64" width="64" x="800" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="backtest-worker" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ecs;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Backtest Worker" vertex="1">
+          <mxGeometry height="64" width="64" x="1040" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="market-pipeline" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.glue;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Market Pipeline" vertex="1">
+          <mxGeometry height="64" width="64" x="1380" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="postgres" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rds;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="PostgreSQL 16" vertex="1">
+          <mxGeometry height="64" width="64" x="520" y="895" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudwatch" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudwatch;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="CloudWatch" vertex="1">
+          <mxGeometry height="64" width="64" x="750" y="895" as="geometry" />
+        </mxCell>
+        <mxCell id="ssm-secrets" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.secrets_manager;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="SSM + Secrets" vertex="1">
+          <mxGeometry height="64" width="64" x="930" y="895" as="geometry" />
+        </mxCell>
+        <mxCell id="results-s3" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;dashed=1;dashPattern=5 4;labelBackgroundColor=none;fillColor=none;" value="Results S3" vertex="1">
+          <mxGeometry height="64" width="64" x="1120" y="895" as="geometry" />
+        </mxCell>
+        <mxCell id="market-s3" parent="1" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;outlineConnect=0;aspect=fixed;html=1;whiteSpace=nowrap;overflow=visible;verticalLabelPosition=bottom;verticalAlign=top;align=center;spacingTop=6;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=none;" value="Market Data S3" vertex="1">
+          <mxGeometry height="64" width="64" x="1400" y="895" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontStyle=1;labelBackgroundColor=none;" value="CONNECTIONS" vertex="1">
+          <mxGeometry height="24" width="100" x="299" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-solid" edge="1" parent="1" style="endArrow=block;endFill=1;strokeWidth=2;labelBackgroundColor=none;fontColor=default;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="419" y="1122" as="sourcePoint" />
+            <mxPoint x="499" y="1122" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-solid-label" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;labelBackgroundColor=none;" value="Request / data / work flow" vertex="1">
+          <mxGeometry height="24" width="190" x="514" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-dashed" edge="1" parent="1" style="endArrow=block;endFill=1;strokeWidth=2;dashed=1;dashPattern=7 5;labelBackgroundColor=none;fontColor=default;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="739" y="1122" as="sourcePoint" />
+            <mxPoint x="819" y="1122" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-dashed-label" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;labelBackgroundColor=none;" value="External / control path" vertex="1">
+          <mxGeometry height="24" width="170" x="834" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="pxbTNbMsgQ2W8r2vb52r-1" parent="1" style="shape=actor;whiteSpace=wrap;html=1;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;fontStyle=0;labelBackgroundColor=none;" value="user" vertex="1">
+          <mxGeometry height="64" width="50" x="67" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="pxbTNbMsgQ2W8r2vb52r-2" parent="1" style="shape=actor;whiteSpace=wrap;html=1;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;fontStyle=0;labelBackgroundColor=none;" value="Operator" vertex="1">
+          <mxGeometry height="64" width="50" x="67" y="470" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=32d9813456">
+<link rel="stylesheet" href="./style.css?v=fb83ead653">
 <link rel="stylesheet" href="./bio-timeline.css?v=abea359171">
-<link rel="stylesheet" href="./project-showcase.css?v=fd7e001d33">
+<link rel="stylesheet" href="./project-showcase.css?v=631c3dc29f">
 </head>
 <body>
 <a class="skip-link" href="#panel-profile">선택한 내용으로 건너뛰기</a>
@@ -54,7 +54,7 @@
 </g>
 </svg>
 </div>
-<nav class="reel-scene" aria-label="포트폴리오 목차, 위아래로 드래그하거나 방향키로 이동" >
+<nav class="reel-scene" aria-label="포트폴리오 목차, 클릭하거나 위아래로 드래그하거나 방향키로 이동" >
 <a class="reel-item is-selected" id="tab-profile" href="#panel-profile" aria-controls="panel-profile" aria-current="location" data-index="0">
 <span class="reel-number" aria-hidden="true">01</span>
 <span class="reel-title">About me</span>
@@ -422,6 +422,32 @@ DEVELOPER · 박준유</p>
 <span class="dim">검증 가능한 전략으로.</span>
 </h2>
 <p class="body-copy">코드를 작성하지 않고 매수·매도 조건을 블록으로 조합하는 주식 가상 트레이딩 봇 SaaS입니다. 과거 시세로 백테스트하고, 서버가 읽는 시장 데이터로 가상 거래를 실행해 실제 자금 없이 전략의 동작을 확인합니다.</p>
+<dl class="fact-grid">
+<div>
+<dt>담당·기여</dt>
+<dd>백엔드 · 시장 데이터 파이프라인 · 실시간 통신</dd>
+</div>
+<div>
+<dt>프로젝트</dt>
+<dd>진행 중 · 2026.06 — 현재</dd>
+</div>
+</dl>
+<div class="chips">
+<span>Java 21</span>
+<span>Spring Boot</span>
+<span>Python 3.12</span>
+<span>FastAPI</span>
+<span>React</span>
+<span>TypeScript</span>
+<span>PostgreSQL</span>
+<span>Redis</span>
+<span>AWS</span>
+<span>Docker</span>
+<span>Terraform</span>
+<span>Flyway</span>
+</div>
+<a class="text-button" href="https://github.com/Idea2Strategy" target="_blank" rel="noopener noreferrer">프로젝트 GitHub <span aria-hidden="true">↗</span>
+</a>
 <section class="service-showcase" aria-labelledby="showcase-title">
 <div class="showcase-heading">
 <div>
@@ -493,61 +519,29 @@ DEVELOPER · 박준유</p>
 <div class="feature-dialog-stage" tabindex="0" aria-label="확대 이미지, 원본 크기에서는 스크롤하여 이동"><img alt=""></div>
 </dialog>
 </section>
-<dl class="fact-grid">
-<div>
-<dt>담당·기여</dt>
-<dd>백엔드 · 시장 데이터 파이프라인 · 실시간 통신</dd>
+<section class="system-architecture" aria-labelledby="architecture-title">
+<div class="showcase-heading">
+<p class="eyebrow">SYSTEM ARCHITECTURE</p>
+<h3 id="architecture-title">시스템 아키텍처</h3>
+<p class="architecture-intro">웹 요청부터 전략 실행, 백테스트와 데이터 저장까지의 흐름입니다.</p>
 </div>
-<div>
-<dt>프로젝트</dt>
-<dd>진행 중 · 2026.06 — 현재</dd>
+<figure class="architecture-figure">
+<div class="architecture-toolbar">
+<span>AWS 개발 환경 · 목표 구성</span>
+<a href="./assets/idea2strategy/system-architecture.drawio" download="idea2strategy-system-architecture.drawio">원본 .drawio <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M8 2v8m-3-3 3 3 3-3M3 11v3h10v-3"/></svg></a>
 </div>
-</dl>
-<div class="chips">
-<span>Java 21</span>
-<span>Spring Boot</span>
-<span>Python 3.12</span>
-<span>FastAPI</span>
-<span>React</span>
-<span>TypeScript</span>
-<span>PostgreSQL</span>
-<span>Redis</span>
-<span>AWS</span>
-<span>Docker</span>
-<span>Terraform</span>
-<span>Flyway</span>
-</div>
-<a class="text-button" href="https://github.com/Idea2Strategy" target="_blank" rel="noopener noreferrer">프로젝트 GitHub <span aria-hidden="true">↗</span>
+<a class="feature-screen-link architecture-image" href="./assets/idea2strategy/system-architecture.svg" target="_blank" rel="noopener" data-screen-title="IDEA2STRATEGY 시스템 아키텍처" aria-label="IDEA2STRATEGY 시스템 아키텍처 확대">
+<img src="./assets/idea2strategy/system-architecture.svg" width="1800" height="1150" loading="lazy" decoding="async" alt="사용자와 외부 데이터가 AWS의 웹 진입 계층, 애플리케이션, 비동기 연산, 공용 저장소로 연결되는 IDEA2STRATEGY 시스템 구성도" aria-describedby="architecture-flows">
+<span class="architecture-enlarge">크게 보기 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M6 2H2v4m8-4h4v4M2 10v4h4m8-4v4h-4"/></svg></span>
 </a>
-<div class="resume-metrics">
-<div>
-<strong>250ms</strong>
-<span>Tick 병합 주기</span>
+<figcaption class="architecture-caption">실선은 요청·데이터·작업 흐름, 점선은 외부·제어 경로를 나타냅니다.</figcaption>
+</figure>
+<div class="architecture-flows" id="architecture-flows">
+<article><span aria-hidden="true">01</span><h4>웹 서비스 진입</h4><p>Route 53과 CloudFront를 거쳐 정적 화면은 Frontend S3로, API 요청은 Public ALB와 Backend API로 연결됩니다.</p></article>
+<article><span aria-hidden="true">02</span><h4>실시간 전략 처리</h4><p>Market Gateway → Redis → Trading Worker → Bot Evaluation → Official Ledger로 이어지는 처리 흐름입니다.</p></article>
+<article><span aria-hidden="true">03</span><h4>비동기 연산과 저장</h4><p>작업 큐로 백테스트와 데이터 파이프라인을 연결하고, PostgreSQL과 S3에 데이터·결과를 저장하는 구조입니다.</p></article>
 </div>
-<div>
-<strong>30초</strong>
-<span>일회용 연결 Ticket 유효 시간</span>
-</div>
-<div>
-<strong>Manifest</strong>
-<span>백테스트 데이터 버전 관리</span>
-</div>
-</div>
-<h3 class="section-heading">시장 데이터 구조</h3>
-<div class="architecture-summary">
-<article>
-<h4>화면 표시</h4>
-<p>실시간 체결 → Market Gateway → 250ms 병합 → Redis Pub/Sub → WebSocket → 브라우저</p>
-</article>
-<article>
-<h4>전략 평가</h4>
-<p>30분 확정 봉 → 30m·1h·4h·1d 집계 → Evaluation Coordinator → Redis Stream → Trading Worker</p>
-</article>
-<article>
-<h4>백테스트 데이터</h4>
-<p>PostgreSQL Manifest → 파일 위치·버전 조회 → S3 Parquet → 체크섬 검증 → 백테스트</p>
-</article>
-</div>
+</section>
 <h3 class="section-heading">문제 해결 기록</h3>
 <details class="case-study">
 <summary>
@@ -868,7 +862,7 @@ DEVELOPER · 박준유</p>
 <noscript>
 <div class="noscript-note">스크롤로 모든 내용을 읽을 수 있습니다. 움직임 효과와 드래그 탐색은 JavaScript를 켜면 사용할 수 있습니다.</div>
 </noscript>
-<script src="./script.js?v=25cf64ea23" type="module">
+<script src="./script.js?v=bba54800e8" type="module">
 </script>
 </body>
 </html>
